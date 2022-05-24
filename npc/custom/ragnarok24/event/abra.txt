@@ -1,0 +1,92 @@
+prontera,172,203,6	script	Абра-Кадабра	ELDER_WILOW,{
+if(getgmlevel()<99){
+if ( .event == 2 || .event == 0 ) end;
+for(set .@i,0;.@i<getarraysize(.aid);set .@i, .@i+1){
+if(getcharid(3)==.aid[.@i]){
+end;
+}
+}
+if ( .event == 1 ) {
+set .aid[ getarraysize(.aid) ], getcharid(3);
+mapannounce "Prontera", strcharinfo(0) +" Присоединяется к игре", 8;
+sc_end SC_ALL;
+end;
+}
+}
+
+
+OnClock0700:
+OnClock0900:
+OnClock1100:
+OnClock1300:
+OnClock1500:
+OnClock1700:
+OnClock1900:
+OnClock2100:
+OnClock2300:
+
+
+if ( .event == 1 || .event == 2){end;}
+announce "Ивент 'Abracadabra' Начинается! Все кто желает участвовать, пройдите в Комнату для Ивентов!.", 8;
+announce "У вас всеголишь 2 минуты на Регистрацию",0;
+set .event, 1;
+deletearray .aid;
+sleep 120000;
+set .event, 2;
+if ( getarraysize(.aid) < 2 ){
+announce "Ивент Отменяется, потому-что не было желающих сыграть", 8;
+deletearray .aid[.@i], 1;
+set .event,0;
+end;
+}
+announce "Регистрация завершена,Ивент начинается.", 8;
+while ( getarraysize(.aid) > 1 ) {
+if (!isloggedin(.aid[.@i])){
+deletearray .aid[.@i], 1;
+set .@i, .@i -1;
+}
+sleep 1000;
+mapannounce "prontera", "~ "+ rid2name(.aid[.@i]), 8;
+attachrid .aid[.@i];
+switch ( rand(25,29) ) {
+case 25:
+set Sp, 0;
+break;
+case 26:
+sc_start SC_STONE,10000,0;
+break;
+case 27:
+sc_start SC_FREEZE,10000,0;
+break;
+case 28:
+sc_start SC_COMA,10000,0;  
+break;
+case 29:
+if ( Hp - 1000000 < 0 ) {
+unitkill getcharid(3);
+deletearray .aid[.@i], 1;
+set .@i, .@i -1;
+}
+else
+set Hp, Hp - 1000000;
+break;
+}
+set .@i, .@i +1 ;
+if ( .@i == getarraysize(.aid) ) {
+set .@i, 0;
+set .@round, .@round +1 ;
+mapannounce "prontera", "Раунд ? "+ .@round, 8;
+}
+}
+if ( .aid == 0 )
+announce "Победителей нету!", 8;
+else {
+announce "В ивенте победил(а) "+ rid2name(.aid) , 8;
+attachrid .aid;
+getitem 13696, 1;   // Свой приз сюда
+atcommand "@raisemap";
+//mapwarp "GtRoArna","prontera",156,181;
+}
+set .event, 0;
+end;
+}

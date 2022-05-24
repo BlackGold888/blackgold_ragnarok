@@ -1,0 +1,11 @@
+prontera,146,164,6	script	Branch fields	ELDER_WILOW,{
+	warp "pay_fild07",200,177;
+	percentheal 100,100;
+	end;
+}
+
+prontera,146,160,6	script	Branch field	LIVE_PEACH_TREE,{
+	warp "gon_dun01",153,48;
+	percentheal 100,100;
+	end;
+}

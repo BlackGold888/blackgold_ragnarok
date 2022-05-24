@@ -1,0 +1,24 @@
+-	script	guild_announce	-1,{
+OnInit:
+bindatcmd "order",strnpcinfo(3)+"::OnAtcommand";
+end;
+
+OnAtcommand:
+.@guild_id = getcharid(2);
+if( .@guild_id && getcharid(0) == getguildmasterid( .@guild_id ) ){
+	.@name$ = strcharinfo(0);
+	.@message$ = implode( .@atcmd_parameters$," " );
+	.@size = query_sql( "SELECT `account_id`,`char_id` FROM `guild_member` WHERE `guild_id` = "+.@guild_id+" AND `online` = 1 ORDER BY `position` ASC",.@aid,.@cid );
+	while( .@i < .@size ){
+		if( isloggedin( .@aid[.@i],.@cid[.@i] ) )
+			if( attachrid( .@aid[.@i] ) ){
+				announce .@name$+": "+.@message$,bc_self,0xffffff;
+				.@received++;
+			}
+		.@i++;
+	}
+	attachrid( .@aid[0] );
+	dispbottom "Message sent.."+.@received+" received";
+}
+end;
+}

@@ -1,0 +1,216 @@
+/*=========================================================
+@go command
+Original concept by jTynne
+Revised by Mumbles
+===========================================================
+Description:
+Alternative @go command. Allows for unlimited aliasing, as 
+well as level and group restrictions for each destination.
+
+Additional options to add a delay, prevent use when dead,
+and charge per use are available; default cost is defined 
+with '.cost', but this parameter can be set manually with 
+'go()'. These extra features are disabled by default.
+
+Be mindful that the delay uses a temporary player variable,
+'@go_delay'; if the player logs out, this variable will be
+cleared. If you would like for a more secure delay, replace
+all instances of '@go_delay' with 'go_delay'.
+===========================================================
+Compatibility:
+Optimised for Hercules emulators.
+===========================================================
+Changelog:
+v1.0 - First version. [jTynne]
+v2.0 - Added additional parameters for locations. [jTynne]
+v3.0 - Optimised for Hercules emulators. [Mumbles]
+	v3.0.1 - Introduced limitless aliasing. [Mumbles]
+	v3.0.2 - Added go() function. [Mumbles]
+v3.1 - Added option to charge per use. [Mumbles]
+	v3.1.1 - Added option to limit use when dead. [Mumbles]
+	v3.1.2 - Added option to limit use to towns. [Mumbles]
+	v3.1.3 - Added changelog. [Mumbles]
+=========================================================*/
+
+-	script	at_go	-1,{
+
+	/*-----------------------------------------------------
+	Configuration
+	-----------------------------------------------------*/
+	OnInit:
+		.delay = 0;		// Delay per use, in seconds (default: 0)
+		.cost = 10000;	// Default cost to use command if '.charge' is enabled
+		.charge = 0;	// Charge to use command? 0 = no, 1 = yes (default: 0)
+		.deadlock = 1;	// Prevent usage when dead? 0 = no, 1 = yes (default: 0)
+		.town = 0;		// Require 'mf_town'? 0 = no, 1 = yes (default: 0)
+		
+		bindatcmd "go", strnpcinfo(3) +"::OnAtcommand", 0, 2;
+		end;
+		
+		
+	/*-----------------------------------------------------
+	Function: go()
+	-------------------------------------------------------
+	Description: Warps player and checks prerequisites.
+	-------------------------------------------------------
+	Usage:
+	go(<"map_name">, <x>, <y>, <level>, <group>, <cost>)
+	-----------------------------------------------------*/
+	function go {
+		if (.deadlock && !Hp) {
+			message strcharinfo(0), "You may not use @go when you are dead.";
+		} else if (getmapflag(strcharinfo(3), mf_nowarp)) {
+			message strcharinfo(0), "You are not authorised to warp from this map.";
+		} else if (.town && !getmapflag(strcharinfo(3), mf_town)) {
+			message strcharinfo(0), "You may only use @go in towns.";
+		} else if (.delay && @go_delay > gettimetick(2)) {
+			message strcharinfo(0), "You must wait "+ (@go_delay - gettimetick(2))  +" seconds before warping again.";
+		} else if (BaseLevel < getarg(3)) {
+			message strcharinfo(0), "You must be at least level "+ getarg(3) +" to warp to this map.";
+		} else if (getgroupid() < getarg(4) || getmapflag(getarg(0), mf_nowarp)) {
+			message strcharinfo(0), "You are not authorised to warp to this map.";
+		} else if (.charge && Zeny < getarg(5)) {
+			message strcharinfo(0), "You must have at least "+ getarg(5) +" zeny to warp to this map.";
+		} else {
+			if (.delay) {
+				@go_delay = gettimetick(2) + .delay;
+			}
+		
+			if (.charge) {
+				Zeny -= getarg(5);
+			}
+		
+			warp getarg(0), getarg(1), getarg(2);
+			end;
+		}
+		
+		message strcharinfo(0), "@go failed.";
+		end;
+	}
+	
+	
+	/*-----------------------------------------------------
+	Function: alias()
+	-------------------------------------------------------
+	Description: Determines if input matches alias.
+	-------------------------------------------------------
+	Usage: alias(<"number">, <"name1">{, <"name2">, <...>})
+	-----------------------------------------------------*/
+	function alias {
+		for (.@i = 0; .@i < getargcount(); .@i++) {
+			if (@input$ == getarg(.@i)) {
+				@input$ = "";
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	/*-----------------------------------------------------
+	Script
+	-----------------------------------------------------*/
+	OnAtcommand:
+		@input$ = .@atcmd_parameters$[0];
+		
+		if (alias("0", "pob", "pobla", "poblacion")) {
+			go("poblacion",150, 149, 0, 0, .cost);
+		} else if (alias("1", "moc", "mor", "morocc", "morroc")) {
+			go("morocc", 158, 92, 0, 0, .cost);
+		} else if (alias("2", "gef", "geffen")) {
+			go("geffen", 120, 70, 0, 0, .cost);
+		} else if (alias("3", "pay", "payo", "payon")) {
+			go("payon", 174, 98, 0, 0, .cost);
+		} else if (alias("4", "alb", "alberta")) {
+			go("alberta", 192, 147, 0, 0, .cost);
+		} else if (alias("5", "izl", "izlude")) {
+			go("izlude", 127, 109, 0, 0, .cost);
+		} else if (alias("6", "ald", "alde", "aldebaran")) {
+			go("aldebaran", 140, 114, 0, 0, .cost);
+		} else if (alias("7", "xmas", "lutie")) {
+			go("xmas", 148, 117, 0, 0, .cost);
+		} else if (alias("8", "com", "comodo")) {
+			go("comodo",189, 151, 0, 0, .cost);
+		} else if (alias("9", "juno", "yuno")) {
+			go("yuno", 157, 182, 0, 0, .cost);
+		} else if (alias("10", "ama", "amat", "amatsu")) {
+			go("amatsu", 115, 153, 0, 0, .cost);
+		} else if (alias("11", "gon", "gonr", "gonryun")) {
+			go("gonryun", 159, 116, 0, 0, .cost);
+		} else if (alias("12", "umb", "umbala", "umbrella")) {
+			go("umbala", 90, 154, 0, 0, .cost);
+		} else if (alias("13", "nif", "niflheim")) {
+			go("niflheim", 195, 175, 0, 0, .cost);
+		} else if (alias("14", "lou", "louyang")) {
+			go("louyang", 218, 99, 0, 0, .cost);
+		} else if (alias("15", "nov", "ng", "novice")) {
+			go("new_1-1", 53, 111, 0, 10, .cost);
+		} else if (alias("16", "jail", "prison")) {
+			go("sec_pri", 23, 61, 0, 10, .cost);
+		} else if (alias("17", "jaw", "jawaii")) {
+			go("jawaii", 221, 221, 0, 0, .cost);
+		} else if (alias("18", "ayo", "ayotaya", "ayothaya")) {
+			go("ayothaya", 151, 165, 0, 0, .cost);
+		} else if (alias("19", "ein", "einbroch")) {
+			go("einbroch", 64, 200, 0, 0, .cost);
+		} else if (alias("20", "lhz", "light", "lighthalzen")) {
+			go("lighthalzen", 158, 92, 0, 0, .cost);
+		} else if (alias("21", "einbe", "einbech")) {
+			go("einbech", 176, 125, 0, 0, .cost);
+		} else if (alias("22", "hug", "hugel")) {
+			go("hugel", 96, 145, 0, 0, .cost);
+		} else if (alias("23", "rach", "rachel")) {
+			go("rachel", 130, 110, 0, 0, .cost);
+		} else if (alias("24", "ve", "veins")) {
+			go("veins", 216, 123, 0, 0, .cost);
+		} else if (alias("25", "mosc", "mosk", "moscovia")) {
+			go("moscovia", 223, 184, 0, 0, .cost);
+		} else if (alias("26", "camp", "mid", "midgard")) {
+			go("mid_camp", 180, 240, 0, 0, .cost);
+		} else if (alias("27", "man", "manuk")) {
+			go("manuk", 282, 138, 0, 0, .cost);
+		} else if (alias("28", "spl", "splend", "splendide")) {
+			go("splendide", 197, 176, 0, 0, .cost);
+		} else if (alias("29", "br", "bra", "brasil", "brasilis")) {
+			go("brasilis", 182, 239, 0, 0, .cost);
+		} else if (alias("30", "el", "eldic", "dic", "dicastes")) {
+			go("dicastes01", 198, 187, 0, 0, .cost);
+		} else if (alias("31", "mora")) {
+			go("mora", 44, 151, 0, 0, .cost);
+		} else if (alias("32", "dew", "dewata")) {
+			go("dewata", 200, 180, 0, 0, .cost);
+		} else if (alias("33", "mal", "malang", "malangdo")) {
+			go("malangdo", 140, 114, 0, 0, .cost);
+		} else if (alias("34", "port", "malay", "malaya")) {
+			go("malaya", 242, 211, 0, 0, .cost);
+		} else if (alias("35", "ecl", "ecla", "eclag", "eclage")) {
+			go("eclage", 110, 39, 0, 0, .cost);
+		} else if (alias("36", "Mall", "mall", "malls", "Mall")) {
+			go("market", 100, 103, 0, 0, .cost);
+		} else if (alias("37", "quest", "Quest", "ques", "Quest")) {
+			go("sky_quest", 38, 41, 0, 0, .cost);
+		} else if (alias("38", "vend", "Vend", "vending", "Vending")) {
+			go("turbo_room", 116, 130, 0, 0, .cost);
+		} else if (alias("39", "Event", "event", "even", "Event")) {
+			go("prontera", 129, 166, 0, 0, .cost);
+		} else if (alias("40", "pro", "pront", "prontera")) {
+			go("prontera", 156, 163, 0, 0, .cost);
+		} else {
+			message strcharinfo(0), "Invalid location number, or name.";
+			message strcharinfo(0), "Params: <city name|number>";
+			message strcharinfo(0), "Warps you to a city.";	
+			message strcharinfo(0), "0: Main Town     1: Morroc     2: Geffen     3: Payon     4: Alberta";
+			message strcharinfo(0), "5: Izlude     6: Al De Baran     7: Lutie     8: Comodo     9: Yuno";
+			message strcharinfo(0), "10: Amatsu     11: Gonryun     12: Umbala     13: Niflheim     14: Louyang";
+			message strcharinfo(0), "15: Novice Grounds     16: Prison     17: Jawaii     18: Ayothaya     19: Einbroch";
+			message strcharinfo(0), "20: Lighthalzen     21: Einbech     22: Hugel     23: Rachel     24: Veins";
+			message strcharinfo(0), "25: Moscovia     26: Midgard Camp     27: Manuk     28: Splendide     29: Brasilis";
+			message strcharinfo(0), "30: El Dicastes     31: Mora     32: Dewata     33: Malangdo     34: Malaya";
+			message strcharinfo(0), "35: Eclage     36: Market     37: Quest Area     38: Vending Area";
+			message strcharinfo(0), "39: Event Area     40: Prontera     @go failed.";
+		}
+		
+		end;
+		
+}

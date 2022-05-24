@@ -1,0 +1,89 @@
+//
+//
+//	Author		Goddameit
+//	Version		2015/02/25
+//	Web		http://goo.gl/0vY9GV
+//
+//
+prontera,150,180,4	script	Test	94,{
+	function	_f1	{
+		if(getstrlen(getarg(0, "")) > getarg(1, 7))
+			return delchar(getarg(0), getarg(1, 7));
+		else
+			return getarg(0);
+	}
+	function	_f2	{
+		return _f1(replacestr(replacestr(getitemname(getarg(0)), "Card", ""), "null", ""), 4);
+	}
+	setcart;
+	callsub OnClean;
+	query_sql "SELECT `nameid`, `amount`, `identify`, `refine`, `attribute`, `card0`, `card1`, `card2`, `card3` FROM `cart_inventory` WHERE `char_id` = "+getcharid(0)+"", @nameid, @amount, @identify, @refine, @attribute, @card0, @card1, @card2, @card3;
+	@num = getarraysize(@nameid);
+	while(1) {
+		@select$ = "";
+		for(.@i = 0; .@i < @num; .@i++) {
+			if(@attribute[.@i] || !@identify[.@i])
+				continue;
+			@select$ = @select$+":["+@price[.@i]+"z][x"+@amountx[.@i]+"]"+(@refine[.@i] > 0 ? "+"+@refine[.@i] : "")+" "+_f1(getitemname(@nameid[.@i]))+" "+_f2(@card0[.@i])+" "+_f2(@card1[.@i])+" "+_f2(@card2[.@i])+" "+_f2(@card3[.@i]);
+		}
+		.@se = prompt("[Continue]", "[Done]");
+		if(.@se == 255)
+			break;
+		else if(.@se == 2) {
+			.@j = 0;
+			for(.@i = 0; .@i < @num; .@i++) {
+				if(!@price[.@i])
+					continue;
+				.@j++;
+			}
+			if(.@j <= 22) {
+				mes "Finish";
+				.@j = 0;
+				for(.@i = 0; .@i < @num; .@i++) {
+					if(!@price[.@i])
+						continue;
+					@spvdmore_idx[.@j] = .@i;
+					@spvdmore_num[.@j] = @amountx[.@i];
+					@spvdmore_val[.@j] = @price[.@i];
+					.@j++;				
+				}
+				@spvdmore_count = .@j;
+			} else {
+				mes "Fail";
+			}
+			break;
+		}else if(.@se == 1) {
+			.@se = prompt(@select$)-2;
+			if(.@se >= 0 && .@se < 100) {
+				mes "Price";
+				input @price[.@se];
+				next;
+				mes "Amount";
+				input @amountx[.@se];
+				next;
+				mes " ";
+				if(@amountx[.@se] > @amount[.@se])
+					@amountx[.@se] = @amount[.@se];
+				if(@amountx[.@se] < 0)
+					@amountx[.@se] = 1;
+			}
+		}
+	}
+	callsub OnClean;
+	close;
+OnClean:
+	@num = 0;
+	@select$ = "";
+	deletearray @nameid;
+	deletearray @amount;
+	deletearray @identify;
+	deletearray @refine;
+	deletearray @attribute;
+	deletearray @card0;
+	deletearray @card1;
+	deletearray @card2;
+	deletearray @card3;
+	deletearray @price;
+	deletearray @amountx;
+	return;
+}

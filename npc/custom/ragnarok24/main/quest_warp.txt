@@ -1,0 +1,9 @@
+prontera,141,180,6	script	Quest	4_M_BARYO_OLD,{
+	warp "morocc",158,173;
+	end;
+}
+
+prontera,147,173,6	script	Branch Arena	8_M_TWSOLDIER,{
+	warp "guild_vs2-1",0,0;
+	end;
+}

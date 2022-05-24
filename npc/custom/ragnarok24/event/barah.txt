@@ -1,0 +1,91 @@
+-	script	baraxol	-1,{
+OnClock1100:
+
+    set $ItemID,rand(4001,4020);
+    set $ItemID2,rand(7230,7240); 
+        
+    set $ItemCo,rand(1,3);
+    set $ItemCo2,rand(1,10);
+                                     
+    announce "[Коллекционер Карт]: Принесите мне: "+getitemname($ItemID)+" [x"+$ItemCo+"]!",0;
+    sleep2 3000;
+    announce "[Коллекционер Вещей]: Принесите мне: "+getitemname($ItemID2)+" [x"+$ItemCo2+"]!",0;
+        
+    set $EventColl,1;
+    set $winner$,"null";
+    initnpctimer;
+    end;
+                
+OnTimer600000: // 10 минут.
+
+    announce "[Коллекционер] : Эвент завершен!Никто ничего не выиграл!",0;
+    set $EventColl,0;
+    stopnpctimer;
+    end;
+}
+                
+
+prontera,188,169,4	script	Коллекционер	4_M_ATEIL,{
+        set .npc$, "^0000FF[Коллекционер]^000000";
+        if($EventColl==1)
+        {
+        mes .npc$;
+        mes "Что вы мне принесли?!";
+        next;
+        if(select("Карты:Вещи")==1)
+                {
+                        if(countitem($ItemID)<$ItemCo)
+                        {
+                                mes .npc$; 
+                                mes "А где карта?Вы должны были принести мне: "+getitemname($ItemID)+" [x"+$ItemCo+"]!";
+                                close;
+                        }
+                        else
+                        {       
+                                delitem $ItemID,$ItemCo;
+                                getitem 7227,1;
+                                set $EventColl,0;
+                                set $winner$,strcharinfo(0);
+                                announce "[Коллекционер Карт]: В эвенте победил игрок: "+$winner$+" !",0;
+                                close;
+                        }
+                }
+                if(countitem($ItemID2)<$ItemCo2)
+                {
+                        mes .npc$; 
+                        mes "А где предмет?Вы должны были принести мне: "+getitemname($ItemID2)+" [x"+$ItemCo2+"]!"; 
+                        close;
+                }
+                else
+                {
+                        delitem $ItemID2,$ItemCo2;
+                        getitem 7227,10;
+                        set $EventColl,0;
+                        set $winner$,strcharinfo(0);
+                        announce "[Коллекционер Вещей]: В эвенте победил игрок: "+$winner$+" !",0;
+                        close;
+                }
+        }
+        else if($EventColl == 0)
+                {
+        {
+                if($winner$==" ")
+                {
+                        mes .npc$;
+                        mes "В данный момент эвент закрыт,ожидайте включения эвента!";
+                }
+                else
+                {
+                        mes .npc$;
+                        mes "В данный момент эвент закрыт,ожидайте включения эвента!";
+                        mes "Победитель прошлого эвента: ^FF0000"+$winner$+"^000000";
+                }
+                close;
+        }
+}
+OnInit:
+
+     set $EventColl,0;
+     waitingroom "[Коллекционер]",0;
+     end;
+}

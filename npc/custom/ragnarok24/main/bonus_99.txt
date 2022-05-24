@@ -1,0 +1,51 @@
+prontera,139,183,6	script	Bonus 99	4_M_SURA,{
+
+	
+	if(BaseLevel == 99 && variable != 1 && Upper == 0){
+
+	mes "Вы получаете награду за поддержку сервера";
+	mes "Мы благодарны за выбор нашего Мира.";
+	next;
+	//if(checkweight(2504,1) == 0 ) goto L_OverWeight;
+	
+
+	getitem 22777,10; // 
+	getitem 14533,1; // 
+	getitem 12210,2; // 
+	
+	emotion e_thx;
+	set variable,1;
+	close;
+
+}else if(BaseLevel == 99 && variable2 != 1 && Upper == 1){
+	mes "Ты получаешь награду за поддержку сервера";
+	mes "Мы благодарны за выбор нашего Мира.";
+	next;
+	getitem 22777,10; // 
+	getitem 14533,1; // 
+	getitem 12210,2; //
+	set variable2,1;
+	close;
+}
+else if(variable == 1 || variable2 == 1){
+mes "Ты получил свою награду.";
+emotion e_omg;
+close;
+}else{
+mes "Привет!";
+mes "Ты еще не достиг нужноного уровня.";
+mes "Что бы получить подарок от сервера, ты должен достигнуть 99 уровня.";
+emotion e_omg;
+close;
+}
+
+
+	
+	OnTimer5000:
+		specialeffect(411, AREA, "Bonus 99");
+		initnpctimer;
+		end;
+	OnInit:
+	initnpctimer;
+	end;
+}

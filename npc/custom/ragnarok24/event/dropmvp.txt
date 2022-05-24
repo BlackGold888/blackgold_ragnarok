@@ -1,0 +1,7 @@
+-	script	Sample	FAKE_NPC,{
+OnInit:
+addmonsterdrop(2934, 674, 500);
+
+
+end;
+}

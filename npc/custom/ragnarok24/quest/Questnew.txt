@@ -1,0 +1,43 @@
+prontera,96,159,5	script	Market	4_M_JOB_HUNTER,{
+mes "Приветствую!";
+mes "Хотите сделать Bloody Branch или Buble Gum?";
+next;
+switch(select("Сделать " + getitemname(12103)+"","Сделать" + getitemname(12210)+"","Cделать" + getitemname(13517)+"") {
+
+case 1:
+mes "Вы хотите сделать "+getitemname(12103)+"";
+mes "Для этого Вам понадобится:";
+mes "1x "+getitemname(7227)+"";
+if (select("Да", "Нет") == 2) close;
+else{
+if(countitem(7227) < 1)close;
+delitem 7227,1;
+
+close;}
+break;
+
+case 2:
+mes "Вы хотите сделать "+getitemname(12210)+"";
+mes "Для этого Вам понадобится:";
+mes "1x "+getitemname(7227)+"";
+if (select("Да", "Нет") == 2) close;
+else{
+if(countitem(7227) < 1)close;
+delitem 7227,1;
+close;}
+break;
+
+case 3:
+mes "Вы хотите сделать "+getitemname(13517)+"";
+mes "Для этого Вам понадобится:";
+mes "30x "+getitemname(7227)+"";
+if (select("Да", "Нет") == 2) close;
+else{
+if(countitem(7227) < 1)close;
+delitem 7227,30;
+close;}
+break;
+
+}
+}
+

@@ -1,0 +1,5 @@
+prontera,143,151,6	script	МВП арена №1	4_ANGELING,{
+	warp "1@jtb",196,204;
+	percentheal 100,100;
+	end;
+}

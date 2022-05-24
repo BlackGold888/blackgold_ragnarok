@@ -1,0 +1,54 @@
+market,89,114,4	script	Gold Exchanger	826,{
+    
+    // Dialogue I
+    mes .name$;
+    mes "Hi there, I can exchange ^FF0000"+ .voucher_amt +"^000000 of your ^FF0000"+ getitemname(.voucher_id) +"^000000 for ^FF00001^000000 ^000088Gold Coin^000000.";
+    next;
+    
+    // Choose item to exchange
+    menu .option$, -;
+    
+    // Dialogue II
+    mes .name$;
+        
+    // Check required voucher amount
+    if (countitem(.voucher_id) < .voucher_amt)
+    {
+        mes "Sorry, but you do not have enough ^FF0000"+ getitemname(.voucher_id) +"^000000 to complete this transaction.";
+        close;
+    }
+    
+    // Delete required item
+    delitem .voucher_id, .voucher_amt;
+    
+    // Get reward
+    .@i = @menu - 1;
+    getitem .item_id[.@i], .amount[.@i];
+    
+    // Dialogue III
+    mes "Thank you! Enjoy your "+ .amount[.@i] +" "+ getitemname(.item_id[.@i]) +"!";
+    close;
+    
+    OnInit:
+	waitingroom "Gold Exchanger",0;
+
+        // NPC name
+        .name$ = "["+ strnpcinfo(1) +"]";
+        
+        // Voucher ID and amount
+        .voucher_id = 969;
+        .voucher_amt = 100;
+        
+        // Item IDs and corresponding amounts
+        setarray .item_id[0],    671;
+        setarray .amount[0],      1;
+        
+        // Fill secondary menu items
+        for (.@i = 1; .@i < getarraysize(.item_id); .@i++)
+            .option$ = .option$ +":"+ .amount[.@i] +" "+ getitemname(.item_id[.@i]);
+        
+        // Add menu items to primary option
+        .option$ = .amount[0] +" "+ getitemname(.item_id[0]) + .option$;
+        
+    end;
+}

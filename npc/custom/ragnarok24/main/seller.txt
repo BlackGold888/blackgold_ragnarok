@@ -1,0 +1,34 @@
+prontera,167,191,4	script	Seller	4_DRUNK_MAN,{
+mes "[Stat Point Seller]";
+	mes "How many Stat Points do you want to buy?";
+	switch(select("1000 Stat Point for 3.000.000 zeny","10000 Stat Points for 30.000.000 zeny")) {
+		case 1:
+			mes "[Stat Point Seller]";
+			mes "This will cost you 3.000.000 zeny. Is this ok?";
+			next;
+			if (select("Yes:No") == 2) close;
+			mes "[Stat Point Seller]";
+			if (Zeny < 3000000) {
+				mes "You do not have enough zeny!";
+                close;
+			}
+			set StatusPoint,StatusPoint + 1000;
+			set Zeny,Zeny - 3000000;
+			mes "Thank you for your purchase.";
+			close;
+		
+		case 2:
+			mes "[Stat Point Seller]";
+			mes "This will cost you 30.000.000 zeny. Is this ok?";
+			next;
+			if (select("Yes:No") == 2) close;
+			mes "[Stat Point Seller]";
+			if (Zeny < 30000000) {
+				mes "You do not have enough zeny!";
+                close;			}
+			set StatusPoint,StatusPoint + 10000;
+			set Zeny,Zeny - 30000000;
+			mes "Thank you for your purchase.";
+			close;
+	}
+}

@@ -1,0 +1,146 @@
+// PvP Arena v1.0 [Sago]
+prontera,164,174,4	script	PvP Master	654,{
+
+// Конфиги
+	set .npc$, "[PvP Master]"; // Имя НПЦ;
+
+	mes .npc$;
+	mes	"На какую арену ты бы хотел телепортироваться?";
+	menu
+	"Главная Арена (^0000FF"+getmapusers("guild_vs2")+"^000000)",basewarp,
+	"PvP Арена 1x1 ^0000FF"+getmapusers("guild_vs3")+"^000000/2",pvpwarp,
+	"Арена до 1000 LvL  (^0000FF"+getmapusers("poring_c01")+"^000000)",lvlwarp,
+	"Emperium Arena  (^0000FF"+getmapusers("pvp_n_5-5")+"^000000)",emperiumwarp,
+	"Я подумаю...",exit;
+
+	basewarp:
+	if(BaseLevel < 100)	{
+	next;
+	mes .npc$;
+	mes "Ты не достиг 1000 уровня!";
+	close;
+	}
+	warp "guild_vs2",49,50;
+	mapannounce "guild_vs2","Игрок "+ strcharinfo(0) +" вошел на PvP Арену",0;
+	end;
+
+
+	pvpwarp:
+	if(getmapusers("guild_vs3") >= 2) {
+	next;
+	mes .npc$;
+	mes "Арена полная!";
+	close;
+	}
+	if(BaseLevel < 100)	{
+	next;
+	mes .npc$;
+	mes "Ты не достиг 1000 уровня!";
+	close;
+	}
+	warp "guild_vs3",49,49;
+	mapannounce "guild_vs3","Игрок "+ strcharinfo(0) +" вошел на PvP Арену",0;
+	end;
+
+	lvlwarp:
+	if(BaseLevel == 100)	{
+	next;
+	mes .npc$;
+	mes "Хм..Тебе стоит выбрать главную арену..";
+	close;
+	}
+	warp "poring_c01",104,98;
+	mapannounce "poring_c01","Игрок "+ strcharinfo(0) +" вошел на PvP Арену",0;
+	end;
+	
+	emperiumwarp:
+	if(BaseLevel < 100)	{
+	next;
+	mes .npc$;
+	mes "Ты недостиг 1000 уровня!";
+	close;
+	}
+	warp "pvp_n_5-5",99,66;
+	mapannounce "pvp_n_5-5","Игрок "+ strcharinfo(0) +" вошел на Emperium Арену",0;
+	end;
+
+	exit:
+	next;
+	mes .npc$;
+	mes "Надумаешь,заходи....";
+	close;
+}
+
+
+poring_c01,104,110,4	script	Exit Girl::Exit	91,{
+// Конфиги
+	set .npcc$, "[Exit Girl]"; // Имя НПЦ;
+
+	mes .npcc$;
+	mes "Ты десйствительно хочешь выйти с арены?";
+	menu
+	"Нет",net,
+	"Да",da;
+
+	da:
+	warp "SavePoint",0,0;
+	close;
+
+	net:
+	close;
+}
+
+// Dublicates
+guild_vs2,49,91,4	duplicate(Exit)	Exit Girl#1	91
+guild_vs3,49,85,4	duplicate(Exit)	Exit Girl#2	91
+guild_vs3,83,50,4	duplicate(Exit)	Exit Girl#3	91
+guild_vs3,50,15,4	duplicate(Exit)	Exit Girl#4	91
+guild_vs3,16,49,4	duplicate(Exit)	Exit Girl#5	91
+guild_vs2,91,50,4	duplicate(Exit)	Exit Girl#6	91
+guild_vs2,50,7,4	duplicate(Exit)	Exit Girl#7	91
+guild_vs2,8,49,4	duplicate(Exit)	Exit Girl#8	91
+
+// Mapflags
+//poring_c01	mapflag	pvp	on
+poring_c01	mapflag	nowarp
+poring_c01	mapflag	nowarpto
+poring_c01	mapflag	pvp_noguild
+poring_c01	mapflag	nosave
+poring_c01	mapflag	nomemo
+poring_c01	mapflag	noteleport
+poring_c01	mapflag	novending
+poring_c01	mapflag	nobranch
+poring_c01	mapflag	noloot
+
+//guild_vs2	mapflag	pvp	on
+guild_vs2	mapflag	nowarp
+guild_vs2	mapflag	nowarpto
+guild_vs2	mapflag	pvp_noguild
+guild_vs2	mapflag	nosave
+guild_vs2	mapflag	nomemo
+guild_vs2	mapflag	noteleport
+guild_vs2	mapflag	novending
+guild_vs2	mapflag	nobranch
+guild_vs2	mapflag	noloot
+
+//poring_w01	mapflag	pvp	on
+guild_vs3	mapflag	nowarp
+guild_vs3	mapflag	nowarpto
+guild_vs3	mapflag	pvp_noguild
+guild_vs3	mapflag	nosave
+guild_vs3	mapflag	nomemo
+guild_vs3	mapflag	noteleport
+guild_vs3	mapflag	novending
+guild_vs3	mapflag	nobranch
+guild_vs3	mapflag	noloot
+
+//pvp_n_5-5	mapflag	pvp	on
+pvp_n_5-5	mapflag	nowarp
+pvp_n_5-5	mapflag	nowarpto
+//pvp_n_5-5	mapflag	pvp_noguild
+pvp_n_5-5	mapflag	nosave
+pvp_n_5-5	mapflag	nomemo
+pvp_n_5-5	mapflag	noteleport
+pvp_n_5-5	mapflag	novending
+pvp_n_5-5	mapflag	nobranch
+pvp_n_5-5	mapflag	noloot

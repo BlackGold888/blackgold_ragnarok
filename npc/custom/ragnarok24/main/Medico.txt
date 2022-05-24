@@ -1,0 +1,106 @@
+//===== Hercules Script ======================================
+//= Хилер
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.2
+//===== Description: =========================================
+//= Basic Хилер script.
+//===== Additional Comments: =================================
+//= 1.0 Initial script.
+//= 1.1 Aligned coordinates with @go.
+//= 1.2 Fix variables and character stuck at healing
+//============================================================
+
+-	script	Хилер	FAKE_NPC,{
+
+	.@price = 0;	// Zeny required for heal
+	.@Delay = 3;	// Heal delay, in seconds
+
+	if (@HD > gettimetick(2)) end;
+	if (.@price) {
+	message strcharinfo(0),"Взымаеться плата за мои услуги - "+.@price+" Zeny.";
+	if (Zeny < .@price) end;
+		Zeny -= .@price;
+	}
+	if( getbrokenid(1) ) repairall;
+	getinventorylist;
+	while( .@i < @inventorylist_count ){
+	if ( !@inventorylist_identify[.@i] ){
+	delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+	getitem @inventorylist_id[.@i],1;
+}
+.@i++;
+}
+sc_end SC_STONE;
+	sc_end SC_FREEZE;
+	sc_end SC_STUN;
+	sc_end SC_SLEEP;
+	sc_end SC_POISON;
+	sc_end SC_CURSE;
+	sc_end SC_SILENCE;
+	sc_end SC_CONFUSION;
+	sc_end SC_BLIND;
+	sc_end SC_BLEEDING;
+percentheal 100,100;
+sc_start SC_INC_AGI,300000,10;
+sc_start SC_BLESSING,300000,10;
+sc_start SC_MAGNIFICAT,300000,5;
+sc_start SC_AURASET,10000,0;
+atcommand "@identify"+@player$;
+specialeffect2 14;
+specialeffect2 65;
+specialeffect2 877;
+	if (.@Delay) @HD = gettimetick(2)+.@Delay;
+	message strcharinfo(0),"„обро Џожаловать на сервер GOLDRO";
+	end;
+OnInit:
+	waitingroom "¤ ~ ~ Хилер ~ ~ ¤",0;
+end;
+}
+
+// Duplicates
+//============================================================
+alberta,25,240,6	duplicate(Хилер)	Хилер#alb	4_M_FAIRYSCHOLAR_DIRTY
+aldebaran,135,118,6	duplicate(Хилер)	Хилер#alde	4_M_FAIRYSCHOLAR_DIRTY
+amatsu,200,79,4	duplicate(Хилер)	Хилер#ama	4_M_FAIRYSCHOLAR_DIRTY
+ayothaya,207,169,6	duplicate(Хилер)	Хилер#ayo	4_M_FAIRYSCHOLAR_DIRTY
+comodo,184,158,6	duplicate(Хилер)	Хилер#com	4_M_FAIRYSCHOLAR_DIRTY
+einbech,57,36,6	duplicate(Хилер)	Хилер#einbe	4_M_FAIRYSCHOLAR_DIRTY
+einbroch,57,202,6	duplicate(Хилер)	Хилер#einbr	4_M_FAIRYSCHOLAR_DIRTY
+geffen,115,72,6	duplicate(Хилер)	Хилер#gef	4_M_FAIRYSCHOLAR_DIRTY
+gonryun,156,122,6	duplicate(Хилер)	Хилер#gon	4_M_FAIRYSCHOLAR_DIRTY
+hugel,89,150,6	duplicate(Хилер)	Хилер#hug	4_M_FAIRYSCHOLAR_DIRTY
+izlude,125,118,5	duplicate(Хилер)	Хилер#izl	4_M_FAIRYSCHOLAR_DIRTY
+jawaii,250,139,4	duplicate(Хилер)	Хилер#jaw	4_M_FAIRYSCHOLAR_DIRTY
+lighthalzen,152,100,6	duplicate(Хилер)	Хилер#lhz	4_M_FAIRYSCHOLAR_DIRTY
+louyang,226,103,4	duplicate(Хилер)	Хилер#lou	4_M_FAIRYSCHOLAR_DIRTY
+manuk,272,144,6	duplicate(Хилер)	Хилер#man	4_M_FAIRYSCHOLAR_DIRTY
+mid_camp,203,289,6	duplicate(Хилер)	Хилер#mid	4_M_FAIRYSCHOLAR_DIRTY
+moc_ruins,72,164,4	duplicate(Хилер)	Хилер#moc	4_M_FAIRYSCHOLAR_DIRTY
+morocc,153,97,6	duplicate(Хилер)	Хилер#mor	4_M_FAIRYSCHOLAR_DIRTY
+moscovia,220,191,4	duplicate(Хилер)	Хилер#mos	4_M_FAIRYSCHOLAR_DIRTY
+niflheim,212,182,5	duplicate(Хилер)	Хилер#nif	4_M_FAIRYSCHOLAR_DIRTY
+payon,179,106,4	duplicate(Хилер)	Хилер#pay	4_M_FAIRYSCHOLAR_DIRTY
+poblacion,146,186,5	duplicate(Хилер)	Хилер#prt	4_M_FAIRYSCHOLAR_DIRTY
+rachel,125,116,6	duplicate(Хилер)	Хилер#rac	4_M_FAIRYSCHOLAR_DIRTY
+splendide,201,153,4	duplicate(Хилер)	Хилер#spl	4_M_FAIRYSCHOLAR_DIRTY
+thor_camp,249,74,4	duplicate(Хилер)	Хилер#thor	4_M_FAIRYSCHOLAR_DIRTY
+umbala,105,148,3	duplicate(Хилер)	Хилер#umb	4_M_FAIRYSCHOLAR_DIRTY
+veins,217,121,4	duplicate(Хилер)	Хилер#ve	4_M_FAIRYSCHOLAR_DIRTY
+xmas,143,136,4	duplicate(Хилер)	Хилер#xmas	4_M_FAIRYSCHOLAR_DIRTY
+yuno,164,45,4	duplicate(Хилер)	Хилер#yuno	4_M_FAIRYSCHOLAR_DIRTY
+
+// Duplicates (Renewal)
+//============================================================
+brasilis,194,221,6	duplicate(Хилер)	Хилер#bra	4_M_FAIRYSCHOLAR_DIRTY
+dewata,195,187,4	duplicate(Хилер)	Хилер#dew	4_M_FAIRYSCHOLAR_DIRTY
+dicastes01,201,194,4	duplicate(Хилер)	Хилер#dic	4_M_FAIRYSCHOLAR_DIRTY
+ecl_in01,45,60,4	duplicate(Хилер)	Хилер#ecl	4_M_FAIRYSCHOLAR_DIRTY
+malangdo,132,114,6	duplicate(Хилер)	Хилер#mal	4_M_FAIRYSCHOLAR_DIRTY
+malaya,205,205,6	duplicate(Хилер)	Хилер#ma	4_M_FAIRYSCHOLAR_DIRTY
+mora,55,152,4	duplicate(Хилер)	Хилер#mora	4_M_FAIRYSCHOLAR_DIRTY
+
+// Excellent RO
+//============================================================
+novice,56,52,3	duplicate(Хилер)	Хилер#nov	4_M_FAIRYSCHOLAR_DIRTY

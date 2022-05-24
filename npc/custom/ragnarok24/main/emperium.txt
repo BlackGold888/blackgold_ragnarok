@@ -1,0 +1,103 @@
+// = Emperium Breaker
+-	script	EmpInitOo	HIDDEN_NPC,{
+OnInit:
+donpcevent "EmpSpawnIn::OnSpawn";
+end;
+}
+
+-	script	EmpSpawnIn	HIDDEN_NPC,{
+OnSpawn:
+killmonsterall "pvp_n_5-5";
+
+set $OwneR$, "Империум";
+
+announce "[Emperium] : Империум появился в pvp_n_5-5!",bc_all;
+
+// = Спавним имп :
+monster "pvp_n_5-5",99,100,"GOLDRO ["+$OwneR$+"]",1288,1,"BreakEmperium::OnBreak";
+
+end;
+}
+
+pvp_n_5-5,0,0,0	script	BreakEmperium	HIDDEN_NPC,{
+OnBreak:
+
+
+set $OwneR$,strcharinfo(0);
+set emp_own,1;
+monster "pvp_n_5-5",99,100,"GOLDRO  ["+$OwneR$+"]",1288,1,"BreakEmperium::OnBreak";
+announce "[Emperium] : ["+$OwneR$+"] захватил локацию [pvp_n_5-5]",bc_all;
+initnpctimer;
+end;
+
+OnTimer300000:
+
+if($OwneR$ == "")
+{
+
+donpcevent "EmpSpawnIn::OnSpawn";
+end;
+}
+if(!getcharid(0,$OwneR$))
+{ 
+set emp_own,0;
+stopnpctimer;
+donpcevent "EmpSpawnIn::OnSpawn";
+} 
+else
+{ 
+attachrid(getcharid(3,$OwneR$)); 
+getmapxy $emperium$,.@x,.@y,0; 
+
+{ 
+getitem 7227,50;
+initnpctimer; 
+end; 
+}
+
+}
+OnInit:
+}
+
+-	script	EmperiumBreakerOo	HIDDEN_NPC,{
+OnPCLogoutEvent:
+if(strcharinfo(0) == $OwneR$)
+{
+set emp_own,0;
+announce "[Emperium] : "+strcharinfo(0)+" вышел с игры, Империум появился!",bc_all;
+donpcevent "EmpSpawnIn::OnSpawn";
+stopnpctimer;
+end;
+}
+end;
+}
+
+-	script	EmperiumDieOo	HIDDEN_NPC,{
+OnPCDieEvent:
+if(emp_own > 0) set emp_own,0;
+end;
+}
+
+pvp_n_5-5	mapflag	gvg_castle
+pvp_n_5-5	mapflag	gvg
+pvp_n_5-5	mapflag	novending
+
+
+
+prontera,156,204,4	script	Emperium Arena	EMPELIUM,{
+// Конфиги
+	set .npcc$, "[Мастер Эмпериум]"; // Имя НПЦ;
+
+	mes .npcc$;
+	mes "Хочешь заработать своей силой?";
+	menu
+	"Нет",net,
+	"Да",da;
+
+	da:
+	warp "pvp_n_5-5",0,0;
+	close;
+
+	net:
+	close;
+}

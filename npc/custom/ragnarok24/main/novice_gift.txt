@@ -1,0 +1,43 @@
+prt_fild08,149,365,3	script	Gift	4_M_NOV_HUNT,{
+
+
+	if(sorry == 1) goto L_1;
+	mes "Вы получаете награду за поддержку сервера";
+	mes "Мы благодарны за выбор нашего Мира.";
+	next;
+	//if(checkweight(2504,1) == 0 ) goto L_OverWeight;
+	
+
+	getitem2 22777,1,0,0,0,0,0,0,0; // 
+	getitem2 2503,1,1,4,0,0,0,0,0; // +4 muffler[1]
+	getitem2 2101,1,1,4,0,0,0,0,0; // +4 buckler[1]
+	getitem2 2416,1,1,4,0,0,0,0,0; // +4 Shoes[1]
+	emotion e_thx;
+	set sorry,1;
+	close;
+
+
+
+L_OverWeight:
+	mes "Вы перегружены";
+	emotion e_omg;
+	close;
+
+
+
+L_1:
+	mes "Вы уже получили свой подарок.";
+	emotion e_bzz;
+	close;
+	
+	OnTimer5000:
+		specialeffect(411, AREA, "Gift");
+		initnpctimer;
+		end;
+	OnInit:
+	waitingroom "Novice Gift",0;
+	initnpctimer;
+	end;
+
+
+}

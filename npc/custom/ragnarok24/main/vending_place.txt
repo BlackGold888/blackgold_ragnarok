@@ -1,0 +1,10 @@
+
+prontera,147,168,6	script	Vending Place	4_DST_CAMEL,{
+	
+		warp "quiz_00",65,22;
+		end;
+OnInit:
+	waitingroom "Vending Place",0;
+	end;	
+
+}

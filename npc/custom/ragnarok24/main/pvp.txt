@@ -1,0 +1,4 @@
+prontera,147,196,6	script	Pvp Place	4_MAN_GALTUN1,{
+	warp "guild_vs3",49,50;
+	end;
+}

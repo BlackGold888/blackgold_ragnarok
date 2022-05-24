@@ -1,0 +1,85 @@
+//===== eAthena Script ======================================= 
+//= TCGcashManager
+//===== By: ================================================== 
+//= azsx123
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//= 3CeAM
+//===== Description: ========================================= 
+//= Converts between Zeny, Cash Points, and TCG
+//===== Additional Comments: ================================= 
+//= 1.0 Initial Release
+//===== Credits: =============================================
+//= azsx123 for the script
+//============================================================
+prontera,130,172,6	script	Трастовый Банк	4_M_SALVATION,{
+
+set .NPCName$,"[ Менеджер ]";	// NPC Name
+set .CP2TCG,1;					// Convertion of Cash Points to TCG   (Default:100)		
+set .Zen2CP,30000000;			// Convertion of Zeny to Cash Points  (Default:10000000)	
+set .Zen2TCG,30000000;			// Convertion of Zeny to Cash Points  (Default:1000000000)
+
+
+	mes .NPCName$;
+	mes "Здравствуйте, что я могу сделать для Вас сегодня?";
+	mes "Курс Конвертации:";
+	mes "^FF0000"+.CP2TCG+"^000000 Cash Points = 1 TCG Card";
+	next;
+	menu  "Cash Points - TCG Card",CTCG,"Посмотреть баланс Cash Points",-;
+
+	mes .NPCName$;
+	mes "В данный момент ^ff0000"+#CASHPOINTS+"^000000 Cash Points на Вашем счете.";
+	close;
+
+CTCG:
+
+	mes .NPCName$;
+	mes "Что вы хотели бы обменять?";
+	next;
+	switch(select("Cash Points на TCG Card:TCG Card на Cash Points"))
+	{
+
+		case 1:
+ 		   mes .NPCName$;
+ 		   mes "Сколько Cash Points вы хотите обменять?";
+ 		   input .@num;
+ 		   next;
+ 		   set .CPoints,.@num*.CP2TCG;
+
+ 		   if(#CASHPOINTS < .CPoints)
+ 		   {
+ 		   mes .NPCName$;
+ 		   mes "К сожалению, у вас нет достаточного количества Cash Points для обмена!";
+ 		   close;
+ 		   }
+ 		   set #CASHPOINTS,#CASHPOINTS-.CPoints;
+ 		   getitem 7227,.@num;
+ 		   mes .NPCName$;
+ 		   mes "В данный момент ^ff0000"+#CASHPOINTS+"^000000 Cash Points на Вашем счете.";
+  		   close;
+
+		case 2:
+  		  mes .NPCName$;
+  		  mes "Сколько TCG Card вы хотите обменять?";
+  		  input .@num;
+  		  next;
+		  set .CPoints,.@num*.CP2TCG;
+  		  if(countitem(7227) < .@num)
+  		  {
+  		  mes .NPCName$;
+   		  mes "К сожалению, у вас нет достаточного количества TCG Card для обмена!";
+  	       	  close;
+  		  }
+   		  set #CASHPOINTS,#CASHPOINTS+.CPoints;
+  		  delitem 7227,.@num;
+  		  mes .NPCName$;
+  		  mes "В данный момент ^ff0000"+#CASHPOINTS+"^000000 Cash Points на Вашем счете.";
+  		  close;
+	 	  }
+
+
+OnInit:
+	waitingroom " ¤ ~ Обменник ~ ¤",0;
+}

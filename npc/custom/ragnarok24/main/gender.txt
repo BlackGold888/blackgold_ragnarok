@@ -1,0 +1,45 @@
+////////////////////////////////////////////////////////////////     
+//---------------------------------------------------
+// Change Sex
+//---------------------------------------------------
+// By: Perdomo	Version: 3.0
+//---------------------------------------------------
+// Description:
+//  Changes the characters gender
+//---------------------------------------------------
+// Additional comments:
+//	- 1.0 NPC Created	[Perdomo]
+//	- 2.0 Script fixed [ToTTi]
+//	- 3.0 Script edited and translated by [Yoh Asakura]
+//---------------------------------------------------
+prontera,138,172,5	script	Change Sex	4_M_SAGE_A,{
+
+set .n$, "[ ^FF0000Surgeon^000000 ]";
+
+set @price,10000000; // Price that will be charged . 
+
+mes .n$;
+mes "";
+mes "Hello ^0000FF"+strcharinfo(0)+"^000000.";
+mes "Would you like to change your sex?";
+mes "The price for it is ^FF000010kk^000000";
+
+if(select("Yes:No, thanks")==2) { close; }
+
+if(Zeny < @price){
+next;
+mes .n$;
+mes "Sorry, you don't have enough money.";
+close;
+
+}else
+{
+mes .n$;
+mes "Alright, here we go.";
+set Zeny,Zeny-10000000;
+close2;
+changesex;
+end;
+}
+
+}

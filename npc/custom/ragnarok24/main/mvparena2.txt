@@ -1,0 +1,5 @@
+prontera,140,151,6	script	МВП арена №2	4_ARCHANGELING,{
+	warp "1@rev",34,119;
+	percentheal 100,100;
+	end;
+}

@@ -1,0 +1,18 @@
+poblacion,0,0,0	script	Day and Night	-1,{
+end;
+
+OnClock0600:
+OnClock1800:
+OnInit:
+    if(gettime(3)>=6 && gettime(3)<18)
+    {
+        day;
+        announce "Good Morning Transcend RO Players.",bc_yellow;
+        end;
+    }
+    
+    night;
+    announce "Good Evening Transcend RO Players.",bc_yellow;
+
+end;
+}

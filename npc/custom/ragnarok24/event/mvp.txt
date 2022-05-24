@@ -1,0 +1,50 @@
+//06,03,2016
+//6/5/2011
+//Version 1: First Release
+-	script	MvpEVENT	-1,{
+
+	OnInit:
+	disablenpc "WPE#START2";
+	end;
+
+
+OnClock2200:
+
+	announce "[Зверь] Герои портал к великому монстру будет открыт через 5 минут.",0,0xFF99FF;
+	announce "[Зверь] Ходят слухи что если кто то сможет убить Зверя получит божественные вещи и много Zeny.",0;
+	sleep2 120000;
+	announce "[Зверь] Портал откроется через 3 минуты, надеюсь вы успели собрать группу так как этого монстра не легко одолеть.",0;
+	sleep2 120000;
+	announce "[Зверь] Портал откроется через 1 минуту, этот монстр приносит много проблем надеюсь найдутся герои что смогут одолеть его.",0;
+	sleep2 60000;
+	announce "[Зверь] Портал открыт.",0;
+	enablenpc "WPE#START2";
+	sleep2 60000;
+	announce "[Зверь] Портал закроется в течении 5 минут.",0;
+	sleep2 240000;
+	announce "[Зверь] Портал закрыт!.",0;
+	disablenpc "WPE#START2";
+	end;
+
+
+
+}
+prontera,180,137,6	warp	WPE#START2	1,1,bat_c01,50,120,6
+
+
+prontera,180,135,6	script	-::mvp	HIDDEN_NPC,{
+	end;
+	
+	OnInit:
+	waitingroom "[Портал Зверя]",0;
+	end;
+}
+
+
+bat_c01	mapflag	nosave	SavePoint
+bat_c01	mapflag	nowarp
+bat_c01	mapflag	nowarpto
+bat_c01	mapflag	noteleport
+bat_c01	mapflag	nomemo
+bat_c01	mapflag	nopenalty
+bat_c01	mapflag	noicewall

@@ -1,0 +1,83 @@
+prontera,164,187,5	script	Tarot Card Of Fate	4_GEFFEN_10,{
+
+if(getgmlevel()<20){
+if ( .Event == 2 || .Event == 0 ) end;
+for(set .@i,0;.@i<getarraysize(.aid);set .@i, .@i+1){
+if(getcharid(3)==.aid[.@i]){
+end;
+}
+
+}
+if ( .Event == 1 ) {
+set .aid[ getarraysize(.aid) ], getcharid(3);
+mapannounce "prontera", strcharinfo(0) +" вступил в игру", 8;
+//atcommand  "@ice "+ strcharinfo(0); 
+end;
+}
+}
+OnClock1300:
+if ( .Event == 1 || .Event == 2){end;}
+announce "[Event] Карты Таро начинается.", 8;
+announce "У вас 120 секунд на регистрацию",0;
+set .Event, 1;
+deletearray .aid;
+sleep 120000;
+set .Event, 2;
+if ( getarraysize(.aid) < 2 ){
+announce "Карты отменяются, т.к участников не набралось", 8;
+deletearray .aid[.@i], 1;
+set .Event,0;
+end;
+}
+announce "Регистрация закончена. Эвент начался.", 8;
+while ( getarraysize(.aid) > 1 ) {
+if (!isloggedin(.aid[.@i])){
+deletearray .aid[.@i], 1;
+set .@i, .@i -1;
+}
+sleep 1000;
+mapannounce "prontera", "очередь "+ rid2name(.aid[.@i]), 8;
+attachrid .aid[.@i];
+switch ( rand(523,526) ) {
+case 523:
+
+set Sp, 0;
+break;
+case 524:
+
+sc_start SC_INCMATKRATE, 30000, -50;
+break;
+case 525:
+
+sc_end SC_INCAGI;
+// .... all positive buff
+break;
+case 526:
+
+if ( Hp - 10000000 < 0 ) {
+unitkill getcharid(3);
+deletearray .aid[.@i], 1;
+set .@i, .@i -1;
+}
+else
+set Hp, Hp - 10000000;
+break;
+}
+set .@i, .@i +1 ;
+if ( .@i == getarraysize(.aid) ) {
+set .@i, 0;
+set .@round, .@round +1 ;
+mapannounce "prontera", "Раунд № "+ .@round, 8;
+}
+}
+if ( .aid == 0 )
+announce "Победителей нет", 8;
+else {
+announce "Победил игрок "+ rid2name(.aid) , 8;
+attachrid .aid;
+getitem 13696,1;
+atcommand "@raisemap";
+}
+set .Event, 0;
+end;
+}

@@ -1,0 +1,19 @@
+-	script	News	-1,{
+OnInit:
+set .Time,13;		// Announce every x Minute.
+
+setarray .News$[0],	// Random Message to be Announced
+		"[Announcement]: Welcome to Transcend Ragnarok Online",
+		"[Announcement]: Just type @commands to view the available commands.",
+		"[Announcement]: You can also use @order command ( Note: If you're a Guild Leader Only )",
+		"[Announcement]: @order is very useful during WOE/Siege War. Sample : @order Go inside NOW!",
+		"[Announcement]: @go 36/@go 37/@go 38 and @go 39 | Mall/Quest/Vending/Event Area.",
+		"[Announcement]: Please Visit our Forum at www.board.transcendro.pw",
+		"[Announcement]: Visit our Website : www.transcendro.pw";
+		
+while( 1 ){
+	announce .News$[ rand( getarraysize( .News$ ) ) ],0;
+	sleep ( .Time * 60000 );
+	}
+end;
+}

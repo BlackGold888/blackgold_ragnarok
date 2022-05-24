@@ -1,0 +1,18 @@
+prontera,139,173,6	script	Берри зона	4_BAPHOMET,{
+	warp "prt_maze03",23,15;
+	percentheal 100,100;
+	end;
+}
+
+
+prontera,140,182,6	script	TCG зона	RANDEL,{
+	warp "lhz_dun04",245,62;
+	percentheal 100,100;
+	end;
+}
+
+prontera,170,170,6	script	ПВП зона	4_M_CRU_SOLD,{
+	warp "coliseum",149,150;
+	percentheal 100,100;
+	end;
+}

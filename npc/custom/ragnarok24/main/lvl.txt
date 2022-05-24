@@ -1,0 +1,8 @@
+prontera,151,160,4	script	Siz2e changer	4_F_DOGTRAVELER,{
+OnPCBaseLvUpEvent:
+if(BaseLevel == 99) {
+atcommand "@item +969";
+announce "Поздравляю "+strcharinfo(0)+" Достиг Максимального Уровня и получает 3000 Стат поинтов В подарок!",0;
+end;
+}
+}

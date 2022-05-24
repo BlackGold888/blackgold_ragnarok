@@ -1,0 +1,45 @@
+// =============================================
+// == MvP Town Invansion 
+// =============================================
+
+new_5-4,92,68,4	script	flint	4W_SAILOR,{
+OnInit:                              
+        setarray $T0wNzz$,"prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera","prontera";
+end;
+
+
+OnClock1500:
+        set .@t0wnn$,$T0wNzz$[rand(getarraysize($T0wNzz$))];
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@town3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        if(.@t0wnn$ == "prontera")	{ set	.@t0wn3$,"Prontera"; }
+        monster ""+.@t0wnn$+"",0,0,"Сокровища",1363,1,"flint::OnTreasure";
+        announce "[Попугай Флинта] Я знаю что Флинт спрятал свои сокровища в городе "+.@t0wn3$+" найдите их!",bc_all|bc_blue;
+end;
+
+OnTreasure:
+announce	"[Попугай Флинта]: Хахаха,бедный Флинт!",bc_all; 
+announce	"[Попугай Флинта]: Игрок "+strcharinfo(0)+" нашел сундук с сокровищами!",bc_all;
+	mes "[Попугай Флинта]";
+	mes "Вот твоя награда!";
+	mes "1 тцг Присуждаются тебе как победителю!";
+	getitem 7227,10;
+ close;
+ end;
+}

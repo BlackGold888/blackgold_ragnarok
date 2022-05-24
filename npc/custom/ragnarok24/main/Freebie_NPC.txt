@@ -1,0 +1,40 @@
+poblacion,159,140,3	script	Freebies	509,{
+
+mes "[^000088 Freebies Giver ^000000]";
+mes "Hello "+strcharinfo(0)+", Welcome To Transcend Ragnarok Online.";
+mes "I'm the freebies giver.";
+mes "I only give 1 freebies per account and can be use by this character only.";
+next;
+mes "[^000088 Freebies Giver ^000000]";
+ 
+if(#freebies) {
+    mes "You already have your freebies.";
+    close;
+}
+ 
+if (select ("Please Bless me:I Change my mind") == 2) {
+    mes "Come back for my Blessing";
+    mes "Thank you";
+    close;
+}
+ 
+else {
+    set #freebies, 1;
+	getitem2 2320,1,1,7,0,0,0,0,0; // +7 formal suit[1]
+	getitem2 2504,1,1,7,0,0,0,0,0; // +7 muffler[1]
+	getitem2 2104,1,1,7,0,0,0,0,0; // +7 buckler[1]
+	getitem2 2102,1,1,7,0,0,0,0,0; // +7 Guard[1]
+	getitem2 2404,1,1,7,0,0,0,0,0; // +7 Shoes[1]
+	getitem 12210, 5;
+	getitem 14533, 5;      
+ 
+    mes "[^000088 Freebies Giver ^000000]";
+    mes "Enjoy your Gifts.";
+    close;
+ }
+end; //Should never happen
+            
+OnInit:
+waitingroom "Freebies Here!",0;
+end;
+}

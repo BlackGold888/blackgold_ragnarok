@@ -1,0 +1,75 @@
+prontera,164,167,7	script	GOLDRO#iz	4_M_KID1,{
+	end;
+
+	OnTimer69000:
+		npctalk "Добро пожаловать на GoldRO.";
+		end;
+
+	OnTimer77000:
+		npctalk "Прекрасный мир.";
+		end;
+
+	OnTimer131000:
+		npctalk "Добро пожаловать на GoldRO";
+		end;
+
+	OnTimer141000:
+		npctalk "В будущем я обязательно стану героем как ты!";
+		end;
+
+	OnTimer149000:
+		npctalk "Добро пожаловать на GoldRO!";
+		end;
+
+	OnTimer217000:
+		npctalk "Голосуй за наш сервер!";
+		end;
+
+	OnTimer281000:
+		npctalk "Добро пожаловать на GoldRO!";
+		end;
+
+	OnTimer279000:
+		npctalk "Добро пожаловать на GoldRO!";
+		end;
+
+	OnTimer339000:
+		npctalk "Добро пожаловать на GoldRO.";
+		end;
+
+	OnTimer349000:
+		npctalk "Говорят тут много Эвентов!";
+		end;
+
+	OnTimer411000:
+		npctalk "Хотел бы я попасть на Эвент!";
+		end;
+
+	OnTimer421000:
+		npctalk "Добро пожаловать на GoldRO!";
+		end;
+
+	OnTimer487000:
+		npctalk "Не забывай звать друзей!";
+		end;
+
+	OnTimer497000:
+		npctalk "Учавствуйте в Эвентах!";
+		end;
+
+	OnTimer557000:
+		npctalk "Мой хозяин говорит что на эвентах можно выйгать призы.";
+		end;
+
+	OnTimer555000:
+		npctalk "Добро пожаловать на GoldRO!";
+		end;
+
+	OnTimer565000:
+		initnpctimer;
+		end;
+
+	OnInit:
+		initnpctimer;
+		end;
+}

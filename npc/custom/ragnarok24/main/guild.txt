@@ -1,0 +1,4 @@
+prtg_cas01,10,209,0,0	monster	TCG Angeling	2934,1,7200000,300000,0
+prtg_cas01,10,210,0,0	monster	TCG Angeling	2934,1,7200000,300000,0
+prtg_cas01,10,211,0,0	monster	TCG Angeling	2934,1,7200000,300000,0
+prtg_cas01,10,212,0,0	monster	TCG Angeling	2934,1,7200000,300000,0

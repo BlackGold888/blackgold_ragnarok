@@ -1,0 +1,76 @@
+prontera,188,165,5	script	Run Or Die	BOMBPORING,{
+	if ( !.start ) {
+		mes "no event atm";
+		close;
+	}
+	if ( .start == 2 ) {
+		mes "Эвент начался!";
+		close;
+	}
+	if ( .register_count >= .register_limit ) {
+		mes "это событие достигло максимума игрока официальным участием";
+		close;
+	}
+	percentheal 100,100;
+	warp .map$, 100,180;
+	.register_aid[ .register_count ] = getcharid(3);
+	.register_count++;
+	end;
+OnCommand:
+OnClock1200: // put all your start timer here
+	if ( .start ) end;
+	announce "Регистрация на эвент Run or Die открыта 3 минуты", bc_all;
+	.start = 1;
+	sleep 180000; // registration timer here
+	announce "Run or Die event Регистрация закрыта!", bc_all;
+	.start = 2;
+	sleep 3000;
+	mapannounce .map$, "Продержитесь на столько на сколько сможете !", bc_map;
+	if ( .register_count < .register_min ) {
+		announce "Не хвотает участников для эвента Run or Die", 0;
+		getmapxy .@map$, .@x, .@y, 1;
+		mapwarp .map$, .@map$, .@x, .@y;
+		goto L_reset;
+	}
+	while ( .start == 2 ) {
+		monster .map$, 0,0, "Come On Baby!!!", 1904, 5 + rand(5), "", 0;
+		monster .map$, 0,0, "Come On Baby!!!", 1904, 5 + rand(5), "", 1;
+		monster .map$, 0,0, "Come On Baby!!!", 1904, 5 + rand(5), "", 2;
+		sleep 5000;
+	}
+	end;
+OnPCDieEvent:
+OnPCLogoutEvent:
+	if ( !.start || strcharinfo(3) != .map$ ) end;
+	while ( .register_aid != getcharid(3) && .@i < .register_count ) .@i++;
+	if ( .@i == .register_count ) end;
+	deletearray .register_aid[.@i], 1;
+	.register_count--;
+	warp "SavePoint", 0,0;
+	if ( .register_count > 1 ) end;
+	killmonsterall .map$;
+	announce "Поздравления ~ победитель в эвенте Run Or Die  "+ rid2name( .register_aid ), bc_all;
+	getitem .reward_item_id, .reward_item_amount, .register_aid; // winner prize
+	warpchar "SavePoint", 0,0, getcharid( 0, rid2name( .register_aid ) );
+L_reset:
+	deletearray .register_aid;
+	.start = .register_count = 0;
+	end;
+OnInit:
+	.map$ = "new_zone04";
+	.register_min = 2; // minimum amount of players to start this event, or else it auto-abort
+	.register_limit = 100; // maximum amount of players able to participate in this event
+	.reward_item_id = 7227; // reward item id
+	.reward_item_amount = 10; // reward item amount to the sole winner
+ 
+	bindatcmd "runordie", strnpcinfo(0)+"::OnCommand", 99,99;
+	end;
+}
+guild_vs5	mapflag	nosave	SavePoint
+guild_vs5	mapflag	nowarp
+guild_vs5	mapflag	nowarpto
+guild_vs5	mapflag	noteleport
+guild_vs5	mapflag	nomemo
+guild_vs5	mapflag	nopenalty
+guild_vs5	mapflag	noicewall
+//guild_vs5	mapflag	nobranch

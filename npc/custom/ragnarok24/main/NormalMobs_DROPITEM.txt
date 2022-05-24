@@ -1,0 +1,13 @@
+-	script	Gold	-1,{
+
+OnNPCKillEvent:
+	if(strcharinfo(3) == "prt_maze02") {
+		
+		getmapxy(.@gold$,.@gx,.@gy,0);
+		set .@Gold_Chance,rand(1,10); //Configure for chance
+		
+		if(.@Gold_Chance == 1) //10% chance. Change to '< 2' for 20%, etc..
+			makeitem 7619,1,7620,1,.@gold$,.@gx,.@gy;
+	}
+	end;
+}

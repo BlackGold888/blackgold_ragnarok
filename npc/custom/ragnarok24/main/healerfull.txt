@@ -1,0 +1,1160 @@
+prontera,160,192,2	script	Healer	941,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+specialeffect2 65;
+specialeffect2 877;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+	
+	
+skilleffect 384,0; sc_start SC_MELTDOWN,360000,5;
+skilleffect 383,0; sc_start SC_WINDWALK,360000,5;
+skilleffect 378,0; sc_start SC_EDP,360000,5;
+skilleffect 465,0; sc_start SC_KAITE,360000,7;
+skilleffect 464,0; sc_start SC_KAUPE,360000,3;
+skilleffect 463,0; sc_start SC_KAAHI,360000,7;
+skilleffect 462,0; sc_start SC_KAIZEL,360000,7;
+skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+skilleffect 45,0; sc_start SC_CONCENTRATE,360000,10;
+skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+skilleffect 459,0; sc_start SC_ADRENALINE2,360000,1;
+skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+skilleffect 67,0; sc_start SC_SUFFRAGIUM,360000,3;
+skilleffect 34,0; sc_start SC_BLESSING,360000,10;
+skilleffect 29,0; sc_start SC_INCREASEAGI,360000,10;
+skilleffect 112,0; sc_start SC_WEAPONPERFECTION,360000,10;
+skilleffect 113,0; sc_start SC_OVERTHRUST,360000,5;
+skilleffect 114,0; sc_start SC_MAXIMIZEPOWER,360000,5;
+skilleffect 357,0; sc_start SC_CONCENTRATION,360000,5;
+skilleffect 355,0; sc_start SC_AURABLADE,360000,5;
+skilleffect 155,0; sc_start SC_LOUD,360000,1;
+skilleffect 157,0; sc_start SC_ENERGYCOAT,360000,1;
+
+
+skilleffect 380,0; sc_start SC_TRUESIGHT,360000,5;
+skilleffect 361,0; sc_start SC_ASSUMPTIO,360000,5;
+	
+	
+	
+end;
+}
+
+bat_room,148,153,4	duplicate(Healer)	Healer#h1-28	79
+rentb1,7,16,4	duplicate(Healer)	Healer#h4-29	79
+rentc1,11,15,4	duplicate(Healer)	Healer#h2-30	79
+rentd1,27,17,4	duplicate(Healer)	Healer#h3-31	79
+rente1,21,14,4	duplicate(Healer)	Healer#h5-32	79
+rentf1,20,12,4	duplicate(Healer)	Healer#h6-29	79
+rentg1,24,11,4	duplicate(Healer)	Healer#h56-29	79
+
+ayothaya,155,111,5	script	Healer#3	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+geffen,118,62,5	script	Healer#99-1	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+umbala,94,162,5	script	Healer#h7-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+payon,178,106,5	script	Healer#h9-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+alberta,31,238,5	script	Healer#h11-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+aldebaran,135,119,5	script	Healer#h12-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+izlude,125,118,5	script	Healer#h13-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+xmas,154,134,5	script	Healer#h15-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+comodo,164,161,5	script	Healer#h16-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+amatsu,105,153,5	script	Healer#h17-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+gonryun,153,122,5	script	Healer#h18-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+yuno,152,186,5	script	Healer#h1929	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+niflheim,188,180,5	script	Healer#164	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+louyang,214,104,5	script	Healer#h20-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+einbech,84,102,5	script	Healer#h21-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+einbroch,70,205,5	script	Healer#h22-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+hugel,94,147,5	script	Healer#h2329	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+jawaii,229,198,5	script	Healer#257	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+lighthalzen,154,97,5	script	Healer#h23-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+moscovia,220,193,5	script	Healer#h24-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+rachel,125,113,5	script	Healer#h25-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+thor_camp,245,71,5	script	Healer#h26-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+veins,223,130,5	script	Healer#h27-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+morocc,159,97,5	script	Healer#h28-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}
+
+moonhaven,207,196,5	script	Healer#h29-29	79,10,10,{
+getinventorylist;
+for( set .i,0; .i < @inventorylist_count; set .i,.i+1)
+{
+	if(@inventorylist_identify[.i] == 0)
+	{
+		delitem2 @inventorylist_id[.i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.i],1;
+	}
+}
+	// Repair
+	while (getbrokenid(1)) {
+		if (Zeny < 1) {
+			mes "[Healer]";
+			mes "You don't have enought money. Repair cost is 1 Zeny.";
+			close;
+			break;
+		}
+		set Zeny, Zeny -1;
+		repair(1);
+		set .@repaired, .@repaired +1;
+		sleep2 500;
+	}
+
+if( BaseLevel < 100 ) { 
+sc_start SC_BLESSING,360000,10;
+sc_start SC_INCREASEAGI,360000,10;
+}
+
+	if (.@repaired) dispbottom .@repaired + " "+( .@repaired==1 ? "piece equip":"all equip" )+" repaired.";
+OnTouch:
+specialeffect 699;
+specialeffect2 310;
+percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+end;
+}

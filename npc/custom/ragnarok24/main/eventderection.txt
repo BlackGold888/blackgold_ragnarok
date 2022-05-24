@@ -1,0 +1,15 @@
+prontera,165,165,6	script	-::mvp2	HIDDEN_NPC,{
+	end;
+	
+	OnInit:
+	waitingroom "[Ёвенты =>>>]",0;
+	end;
+}
+
+prontera,146,164,6	script	-::mvp3	HIDDEN_NPC,{
+	end;
+	
+	OnInit:
+	waitingroom "[<<<= весты]",0;
+	end;
+}

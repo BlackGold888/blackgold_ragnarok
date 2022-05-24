@@ -1,0 +1,5 @@
+-	script	OnPCLoginEvent	-1,{
+OnPCLoginEvent:
+        announce strcharinfo(0) + "  have just joined us !", bc_all | bc_blue;
+    end;
+}

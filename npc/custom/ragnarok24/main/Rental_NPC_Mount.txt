@@ -1,0 +1,43 @@
+poblacion,158,190,4	script	Mount Rental#123	875,{
+
+mes "Welcome to Reins Of Mount Rental.";
+mes "You need ^0000FF1 " +getitemname(.rentitemid)+ "^000000";
+mes "^0000FF1 " +getitemname(.rentitemid)+ "^000000 = 1 day";
+mes "^0000FF2 " +getitemname(.rentitemid)+ "^000000 = 2 days";
+mes "^0000FF3 " +getitemname(.rentitemid)+ "^000000 = 3 days";
+mes "And so on.";
+    next;
+mes "Rent cost: ^FF0000" + .rentitemamt + "^000000x ^0000FF" +getitemname(.rentitemid)+ "^000000 for one day";
+    next;
+    mes "What do you want to rent?";
+switch ( select ( .menu$ )  ) { // items to rent menu
+    case 1: callsub OnDeclareDays; // call OnDeclareDays to input days.
+            callsub OnRentItems,12622,.days; // 2410 is sleipnir's Item ID. only change the item ID.
+    // to add more items add more cases example
+    // case 3: callsub OnDeclareDays;
+    //            callsub OnRentItems,2220,.days; // rent hat
+    // and add its name on .menu$ part at the bottom.
+    // pretty simple huh. :)
+}
+
+OnDeclareDays:
+        mes "How many days do you want to rent it?";
+        input .days; // input days
+        if (.days == 0 ) { // 0 is not a valid value.
+            mes "0 is not a valid value.";
+            close;
+        }
+        return .days;
+OnRentItems:
+        if ( countitem ( .rentitemid ) < getarg(1) * .rentitemamt ) { // not enough items
+            mes " ","Not Enough items","You need "+getarg(1) * .rentitemamt+"x "+getitemname(.rentitemid);
+            close;
+        }
+        delitem .rentitemid, getarg(1) * .rentitemamt; // delete items
+        rentitem getarg(0), getarg(1) * 86400; // rent an items. 86400 = 1 day in seconds
+        close;
+OnInit:
+    set .rentitemid, 671; // item id of TCG change to your likings.
+    set .rentitemamt, 1; // item amount of TCG change to your likings.
+    set .menu$,"Reins Of Mount "; // to add an item separate the item with ":" without the quotes eg: "Sleip:Megs:HAT"
+}

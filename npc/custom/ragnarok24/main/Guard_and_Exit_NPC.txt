@@ -1,0 +1,224 @@
+// To the Rebirth NPC
+
+poblacion,160,157,3	script	Rebirth Area	435,{
+	shop:	warp "darkmall.gat" ,100,132;
+end;
+
+OnInit:
+waitingroom "Rebirth Area",0;
+end;
+
+
+}
+
+//rebirth area sign board
+
+darkmall,95,138,6	script	Sign Board Tran	835,{
+
+end;
+OnInit:
+waitingroom "Rebirth Area",0;
+end;
+
+}
+
+//market area sign board
+
+market,103,125,6	script	Market Sign	835,{
+
+end;
+OnInit:
+waitingroom "More NPC --->",0;
+end;
+
+}
+
+//The Warper to Mall
+
+poblacion,139,157,4	script	Market Area	91,{
+	shop:	warp "market" ,100,103;
+end;
+
+OnInit:
+waitingroom "Market Area",0;
+end;
+
+
+}
+
+//The Warper to Gold Area
+
+poblacion,165,181,4	script	Gold Farming Area	900,{
+	shop:	warp "prt_maze01" ,0,0;
+end;
+
+OnInit:
+waitingroom "Gold Farming Area",0;
+end;
+
+
+}
+
+
+
+//The Warper to Vend
+
+poblacion,133,166,4	script	Vending Area	708,{
+	shop:	warp "turbo_room" ,83,122;
+end;
+
+OnInit:
+waitingroom "Vending Area",0;
+end;
+
+
+}	
+
+//The Exit to Prontera
+
+turbo_room,95,123,6	script	Security Elmo	707,{
+	warp "poblacion" ,150,149;
+end;
+
+OnInit:
+waitingroom "Exit",0;
+end;
+
+}
+
+//The Exit to Prontera
+
+turbo_room,104,123,6	script	Security Naniel	707,{
+	warp "poblacion" ,150,149;
+end;
+
+OnInit:
+waitingroom "Exit",0;
+end;
+
+}
+
+//Turbo Room Vending Sign
+
+turbo_room,112,118,6	script	Sign Board	835,{
+
+end;
+OnInit:
+waitingroom "Vending Area",0;
+end;
+
+}
+
+//Turbo Room Vending Sign
+
+//turbo_room,114,98,6	script	More Npc	835,{
+
+
+//OnInit:
+//waitingroom "Rental Item / MVP Cards",0;
+//end;
+
+//}
+
+// Event Area [joinevent]
+
+quiz_02,293,266,6	script	Event Security	707,{
+	mes "[Event Security]";
+	mes "Hello What can I do for you?";
+	next;
+	menu "Warp to Prontera",backtopront,"Leave",leave;
+	backtopront:
+	mes "[Event Security]";
+	mes "Warping you now to Prontera";
+	close2;
+	warp "prontera",156,184;
+	end;
+	leave:
+	next;
+	mes .@n$;
+	mes "Okay See you around!";
+	close;
+
+
+
+
+OnInit:
+waitingroom "Event Security",0;
+end;
+
+}
+
+// Event Area [EVENT]
+
+prontera,127,169,6	script	Event Area	858,{
+end;
+OnInit:
+waitingroom "Event Area",0;
+end;
+
+}
+
+// Quest Area [EVENT]
+
+poblacion,156,147,6	script	Quest Area	858,{
+warp "sky_quest",38,41;
+end;
+OnInit:
+waitingroom "Quest Area",0;
+end;
+
+}
+
+//Turbo Room Quest Sign
+
+sky_quest,43,43,6	script	Quest Board	835,{
+
+end;
+OnInit:
+waitingroom "Quest Area",0;
+end;
+
+}
+
+
+//Refiner NPC sign board
+
+market,104,103,6	script	Advance Refiner	858,{
+
+end;
+OnInit:
+waitingroom "Advance Refiner",0;
+end;
+
+}
+
+
+// Ygg Area [YGG]
+
+poblacion,165,175,4	script	Enriched Area	896,{
+warp "prt_maze02.gat",0,0;
+end;
+OnInit:
+waitingroom "Enriched Farming Area",0;
+end;
+
+}
+
+//Duplicate of Quest  sign
+//turbo_room,85,90,6	duplicate(Quest Board)	Quest Board#Quest01	835
+
+//Duplicate of Rebirt  sign
+prontera,136,171,6	duplicate(Rebirth Area)	Rebirth Area#RB1	435
+
+//Duplicate of market sign
+market,113,114,6	duplicate(Market Sign)	Market Sign#Market01	835
+market,96,125,6	duplicate(Market Sign)	Market Sign#Market02	835
+market,113,109,6	duplicate(Market Sign)	Market Sign#Market03	835
+//market,86,115,6	duplicate(Market Sign)	Market Sign#Market04	835
+//market,86,108,6	duplicate(Market Sign)	Market Sign#Market05	835
+
+//Duplicate of Event Security
+quiz_02,314,266,6	duplicate(Event Security)	Event Security#Event01	707
+
+//Duplicate of vending sign
+turbo_room,87,118,6	duplicate(Sign Board)	Sign Board#Vending01	835

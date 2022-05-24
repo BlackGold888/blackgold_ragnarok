@@ -1,0 +1,6 @@
+prontera,139,177,6	script	Голд зона	4_M_PECOKNIGHT,{
+	warp "yuno_fild08",197,198;
+	percentheal 100,100;
+	end;
+}
+

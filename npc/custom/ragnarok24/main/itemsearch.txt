@@ -1,0 +1,156 @@
+/* =============================================================
+/* Item Search
+/* =============================================================
+/* Version: v0.7
+/* v0.1 - Original Script Created.
+/* v0.2 - Added Support for (database.)Midgard-Community.com
+/* v0.3 - Added Support for Yourolist.com
+/* v0.4 - Cleaned up script.
+/* v0.5 - Removed if(else) statements when copying final arrays.
+/* v0.6 - Replaced use of GOTO command with loops.
+/* v0.7 - Added Support for 2.1 billion websites.
+/* =============================================================
+/* Description
+/* =============================================================
+/* This script will allow users to search information about an
+/* item in-game. Supports both renewal/non-renewal items. It
+/* will show the exact item if using the search directory
+/* function. If however using the input method, this script will
+/* will run a broadened search, or pull up the exact item if an
+/* item ID is given instead of a name.
+/* =============================================================
+/* Features
+/* =============================================================
+/* Choose between what website you want your server to use.
+/* Or simply leave that upto your players by enabling all sites.
+/* =============================================================
+/* NOTE - Requires a client from 2011-10-10aRagexe.exe onwards.
+/* NOTE2 - RateMyServer Link does not support custom items.
+/* =============================================================
+/* Created By: GmOcean
+/* ===========================================================*/
+prt_fild08,167,363,4	script	Item Search	123,{
+mes "[Monster Database Manager]","Hey, I'm the certified monster database manager.","What monster did you want to look up?";
+mes "You can either use the database directory log or if you know the exact monster just let me know which one,","and I'll bring it up.";
+if( select("Use database search:I know what monster") == 2 ) {
+	next;
+	mes "Please input the Monster ID of the monster you want to look up.";
+	input .@mob_id;
+	if( !getmobdrops( .@mob_id ) ) { mes "^FF0000 INVALID MONSTER"; close; }
+	.@mob_id$ = getmonsterinfo( .@mob_id, 0 );
+	next;
+	switch( .website_toggle ){
+		case 0: // All Options
+		case 1: // RateMyServer
+			mes "---- RateMyServer";
+			mes "<URL>"+ strtoupper( .@mob_id$ ) +"<INFO>http://ratemyserver.net/index.php?mob_id="+ .@mob_id +"&page="+ ( checkre(0)?"re_":"" ) +"mob_db&f=1&mob_search=Search</INFO></URL>";
+			if( .website_toggle ){ close; }
+		
+		case 2: // Midgard-Community
+			mes "---- Midgard-Community";
+			mes "<URL>"+ strtoupper( .@mob_id$ ) +"<INFO>http://database.midgard-community.com/?act=mobsearch&cid=1&id="+ .@mob_id +"</INFO></URL>";
+			if( .website_toggle ){ close; }
+		
+		case 3: // Yourolist
+			mes "---- Yourolist";
+			mes "<URL>"+ strtoupper( .@mob_id$ ) +"<INFO>http://yourolist.com/view_mob_light/"+ .@mob_id +"/"+ (checkre(0)?0:1) +"</INFO></URL>";
+			if( .website_toggle ){ close; }
+		
+		case 2147483647: // End of list. It's impossible to get this much websites.
+			break;
+	}
+	close;
+}
+.@i = 1001;
+freeloop(1);
+while( .@i < .lastmobindb ){
+	if( !compare( .blacklist$, ""+ .@i +"" ) ){
+		.@a++;
+		.@menu$[.@a] = ""+ getmonsterinfo( .@i, 0 ) +"";
+		.@mobid[.@a] = .@i;
+	}
+	.@i++;
+}
+while( .@menu$[(.@c + 1)] != "" ){
+	.@menustr$ = "";
+	.@idnum$ = "";
+	while( .@c < ( .@b + .searchlimit + 1 ) ) {
+		.@c++;
+		.@menustr$ = .@menustr$ + .@menu$[.@c] + ":";
+		.@idnum$ = .@idnum$ + ""+ .@mobid[.@c] + ":";
+	}
+	.@b += .searchlimit;
+	.@storedstr$[.@b] = .@menustr$;
+	.@storedidn$[.@b] = .@idnum$;
+}
+.@menu = 1;
+.@menuloop += .searchlimit;
+while( .@menu == 1 || .@menu == 2 ){
+	.@str$ = ( (.@menuloop > .searchlimit)?"^FF0000PREVIOUS ["+ .searchlimit +"]^000000:":"" ) + .@storedstr$[.@menuloop] + ( (.@storedstr$[(.@menuloop + .searchlimit)] == "")?"":":^0000FFNEXT ["+ .searchlimit +"]^000000" );
+	explode( .@temp$, .@str$, ":" );
+	.@select = select( .@str$ );
+	if( .@select == getarraysize( .@temp$ ) && .@storedstr$[(.@menuloop + .searchlimit)] != "" ){ .@menuloop += .searchlimit; .@menu = 2; } 
+	else if( .@select == 1 && .@menuloop > .searchlimit ){ .@menuloop -= .searchlimit; .@menu = 1; }
+	else { .@menu = 0; }
+}
+//Monster Selected, so create array out of string for selection.
+explode( .@searcharray$, .@storedstr$[.@menuloop], ":" );
+explode( .@searchidnum$, .@storedidn$[.@menuloop], ":" );
+
+//Shifts All data over to be used with @menu variable.
+copyarray .@searcharray2$[( (.@menuloop > .searchlimit)?2:1 )],.@searcharray$[0],getarraysize(.@searcharray$);
+copyarray .@searchidnum2$[( (.@menuloop > .searchlimit)?2:1 )],.@searchidnum$[0],getarraysize(.@searchidnum$);
+
+next;
+switch( .website_toggle ){
+	case 0: // All Options
+	case 1: // RateMyServer
+		mes "---- RateMyServer";
+		mes "<URL>"+ strtoupper( .@searcharray2$[@menu] ) +"<INFO>http://ratemyserver.net/index.php?mob_id="+ atoi( .@searchidnum2$[@menu] ) +"&page="+ (checkre(0)?"re_":"") +"mob_db&quick=1&isearch=Search</INFO></URL>";
+		if( .website_toggle ){ close; }
+	
+	case 2: // Midgard-Community
+		mes "---- Midgard-Community";
+		mes "<URL>"+ strtoupper( .@searcharray2$[@menu] ) +"<INFO>http://database.midgard-community.com/?act=mobsearch&cid=1&id="+ atoi( .@searchidnum2$[@menu] ) +"</INFO></URL>";
+		if( .website_toggle ){ close; }
+	
+	case 3: // Yourolist
+		mes "---- Yourolist";
+		mes "<URL>"+ strtoupper(.@searcharray2$[@menu]) +"<INFO>http://www.yourolist.com/view_mob_light/"+ .@searchidnum2$[@menu] +"</INFO></URL>";
+		if( .website_toggle ){ close; }
+		
+	case 2147483647: // End of list. It's impossible to get this much websites.	
+}
+freeloop(0);
+close;
+
+OnInit:
+// Which website do you want players to use to search.
+// 0 = All Websites
+// 1 = Ratemyserver.net
+// 2 = (database.)Midgard-Community.com
+// 3 = Yourolist.com
+// Default: 0 ( All )
+.website_toggle = 0;
+
+// How many monster to display in the menu at a time. (MAX).
+.searchlimit = 25;
+
+//Set this to the LAST highest mob_id in your db. USE OFFICIAL MOB_ID ONLY!!
+//This script won't work with custom mobs since RateMyServer.net doesn't support them =P
+.lastmobindb = 2476;
+
+//DO NOT CHANGE THE BELOW !!
+//Creates a dynamic black-list for the script to use. ( I should consider using this for my disguise event ).
+//We use getmobdrops because it doesn't return an error in map-serv =P
+freeloop(1);
+.@i = 1001;
+while( .@i < .lastmobindb ){
+	if( !getmobdrops( .@i ) ){
+		.blacklist$ = .blacklist$ +","+ .@i +",";
+	}
+	.@i++;
+}
+freeloop(0);
+end;
+}

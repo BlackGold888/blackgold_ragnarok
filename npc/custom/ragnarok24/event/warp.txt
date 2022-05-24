@@ -1,0 +1,246 @@
+//Katazui
+//6/5/2011
+//Version 1: First Release
+-	script	WarpPortalEvent	-1,{
+
+	OnInit:
+	disablenpc "WPE#START";
+	end;
+
+OnClock1800:
+
+	announce "[Warp Event] Начало эвента через 5 минут.",0,0xFF99FF;
+	sleep2 120000;
+	announce "[Warp Event] Начало эвента через 3 минуты.",0,0xFF99FF;
+	sleep2 120000;
+	announce "[Warp Event] ачало эвента через 1 минуту.",0,0xFF99FF;
+	sleep2 60000;
+	announce "[Warp Event] Эвент стартовал. Порталы активны.",0,0xFF99FF;
+	enablenpc "Mr. Warp";
+	enablenpc "WPE#START";
+	set $WPEC,rand(1,4);
+	if ($WPEC == 1) goto PortalChange1;
+	if ($WPEC == 2) goto PortalChange2;
+	if ($WPEC == 3) goto PortalChange3;
+	if ($WPEC == 4) goto PortalChange4;
+	end;
+
+	PortalChange1:
+	movenpc "WPE#0-1-1",36,350;
+	movenpc "WPE#0-1-2",27,341;
+	movenpc "WPE#0-1-3",36,341;
+	movenpc "WPE#1-1-4",27,350;
+	movenpc "WPE#0-2-1",138,352;
+	movenpc "WPE#0-2-2",138,343;
+	movenpc "WPE#0-2-3",129,343;
+	movenpc "WPE#1-2-4",129,352;
+	movenpc "WPE#1-3-1",231,350;
+	movenpc "WPE#0-3-2",240,350;
+	movenpc "WPE#0-3-3",240,341;
+	movenpc "WPE#0-3-4",231,341;
+	movenpc "WPE#1-4-1",64,350;
+	movenpc "WPE#0-4-2",64,341;
+	movenpc "WPE#0-4-3",55,341;
+	movenpc "WPE#0-4-4",55,350;
+	movenpc "WPE#0-5-1",166,352;
+	movenpc "WPE#1-5-2",166,343;
+	movenpc "WPE#0-5-3",157,343;
+	movenpc "WPE#0-5-4",157,352;
+	movenpc "WPE#0-6-1",268,350;
+	movenpc "WPE#0-6-2",268,341;
+	movenpc "WPE#0-6-3",259,341;
+	movenpc "WPE#1-6-4",259,350;
+	end;
+
+	PortalChange2:
+	movenpc "WPE#0-1-1",27,341;
+	movenpc "WPE#0-1-2",36,350;
+	movenpc "WPE#0-1-3",27,350;
+	movenpc "WPE#1-1-4",36,341;
+	movenpc "WPE#0-2-1",138,343;
+	movenpc "WPE#0-2-2",129,343;
+	movenpc "WPE#0-2-3",129,352;
+	movenpc "WPE#1-2-4",138,352;
+	movenpc "WPE#1-3-1",231,341;
+	movenpc "WPE#0-3-2",231,350;
+	movenpc "WPE#0-3-3",240,350;
+	movenpc "WPE#0-3-4",240,341;
+	movenpc "WPE#1-4-1",55,350;
+	movenpc "WPE#0-4-2",64,350;
+	movenpc "WPE#0-4-3",64,341;
+	movenpc "WPE#0-4-4",55,341;
+	movenpc "WPE#0-5-1",166,343;
+	movenpc "WPE#1-5-2",157,343;
+	movenpc "WPE#0-5-3",157,352;
+	movenpc "WPE#0-5-4",166,352;
+	movenpc "WPE#0-6-1",268,341;
+	movenpc "WPE#0-6-2",259,341;
+	movenpc "WPE#0-6-3",259,350;
+	movenpc "WPE#1-6-4",268,350;
+	end;
+
+	PortalChange3:
+	movenpc "WPE#0-1-1",36,341;
+	movenpc "WPE#0-1-2",27,341;
+	movenpc "WPE#0-1-3",36,350;
+	movenpc "WPE#1-1-4",27,350;
+	movenpc "WPE#0-2-1",129,343;
+	movenpc "WPE#0-2-2",129,352;
+	movenpc "WPE#0-2-3",138,352;
+	movenpc "WPE#1-2-4",138,343;
+	movenpc "WPE#1-3-1",240,341;
+	movenpc "WPE#0-3-2",231,341;
+	movenpc "WPE#0-3-3",231,350;
+	movenpc "WPE#0-3-4",240,350;
+	movenpc "WPE#1-4-1",64,341;
+	movenpc "WPE#0-4-2",55,341;
+	movenpc "WPE#0-4-3",55,350;
+	movenpc "WPE#0-4-4",64,350;
+	movenpc "WPE#0-5-1",157,343;
+	movenpc "WPE#1-5-2",157,352;
+	movenpc "WPE#0-5-3",166,352;
+	movenpc "WPE#0-5-4",166,343;
+	movenpc "WPE#0-6-1",259,341;
+	movenpc "WPE#0-6-2",259,350;
+	movenpc "WPE#0-6-3",268,350;
+	movenpc "WPE#1-6-4",268,341;
+	end;
+
+	PortalChange4:
+	movenpc "WPE#0-1-1",27,350;
+	movenpc "WPE#0-1-2",36,350;
+	movenpc "WPE#0-1-3",27,341;
+	movenpc "WPE#1-1-4",36,341;
+	movenpc "WPE#0-2-1",129,352;
+	movenpc "WPE#0-2-2",138,352;
+	movenpc "WPE#0-2-3",138,343;
+	movenpc "WPE#1-2-4",129,343;
+	movenpc "WPE#1-3-1",240,350;
+	movenpc "WPE#0-3-2",240,341;
+	movenpc "WPE#0-3-3",231,341;
+	movenpc "WPE#0-3-4",231,350;
+	movenpc "WPE#1-4-1",55,341;
+	movenpc "WPE#0-4-2",55,350;
+	movenpc "WPE#0-4-3",64,350;
+	movenpc "WPE#0-4-4",64,341;
+	movenpc "WPE#0-5-1",157,352;
+	movenpc "WPE#1-5-2",166,352;
+	movenpc "WPE#0-5-3",166,343;
+	movenpc "WPE#0-5-4",157,343;
+	movenpc "WPE#0-6-1",259,350;
+	movenpc "WPE#0-6-2",268,350;
+	movenpc "WPE#0-6-3",268,341;
+	movenpc "WPE#1-6-4",259,341;
+	end;
+
+
+
+
+}
+
+quiz_02,304,256,6	script	Mr. Warp	4W_M_01,{
+	announce "[Warp Event] "+strcharinfo(0)+" победил Warp Event! Поздравляем!",0,0xFF99FF;
+	getitem 7227,10; //Prize
+	warp "prontera",155,179;
+	disablenpc "Mr. Warp";
+	disablenpc "WPE#START";
+	end;
+
+	OnInit:
+	waitingroom "Приз!",0;
+	end;
+}
+
+quiz_02,31,351,6	script	Stage 1#WPE	4W_M_01,{
+	end;
+	
+	OnInit:
+	waitingroom "Уровень 1",0;
+	end;
+}
+
+quiz_02,133,353,6	script	Stage 2#WPE	4W_M_01,{
+	end;
+	
+	OnInit:
+	waitingroom "Уровень 2",0;
+	end;
+}
+
+quiz_02,235,351,6	script	Stage 3#WPE	4W_M_01,{
+	end;
+	
+	OnInit:
+	waitingroom "Уровень 3",0;
+	end;
+}
+
+quiz_02,60,351,6	script	Stage 4#WPE	4W_M_01,{
+	end;
+	
+	OnInit:
+	waitingroom "Уровень 4",0;
+	end;
+}
+
+quiz_02,161,353,6	script	Stage 5#WPE	4W_M_01,{
+	end;
+	
+	OnInit:
+	waitingroom "Уровень 5",0;
+	end;
+}
+
+quiz_02,263,351,6	script	Stage 6#WPE	4W_M_01,{
+	end;
+	
+	OnInit:
+	waitingroom "Уровень 6",0;
+	end;
+}
+
+prontera,178,170,6	script	-::her	HIDDEN_NPC,{
+	end;
+	
+	OnInit:
+	waitingroom "[Warp Event]",0;
+	end;
+}
+
+
+quiz_02	mapflag	nowarp
+quiz_02	mapflag	nowarpto
+quiz_02	mapflag	noteleport
+quiz_02	mapflag	nomemo
+quiz_02	mapflag	nosave
+quiz_02	mapflag	pvp	off
+quiz_02	mapflag	nobranch
+quiz_02	mapflag	noskill
+quiz_02	mapflag	novending
+
+prontera,177,168,6	warp	WPE#START	1,1,quiz_02,31,345
+quiz_02,304,244,6	warp	WPE#END	1,1,prontera,175,163
+quiz_02,27,350,6	warp	WPE#0-1-1	1,1,prontera,137,200
+quiz_02,36,350,6	warp	WPE#0-1-2	1,1,prontera,137,200
+quiz_02,27,341,6	warp	WPE#0-1-3	1,1,prontera,137,200
+quiz_02,36,341,6	warp	WPE#1-1-4	1,1,quiz_02,134,347
+quiz_02,129,352,6	warp	WPE#0-2-1	1,1,quiz_02,31,345
+quiz_02,138,352,6	warp	WPE#0-2-2	1,1,quiz_02,31,345
+quiz_02,138,343,6	warp	WPE#0-2-3	1,1,quiz_02,31,345
+quiz_02,129,343,6	warp	WPE#1-2-4	1,1,quiz_02,236,345
+quiz_02,231,350,6	warp	WPE#1-3-1	1,1,quiz_02,60,345
+quiz_02,240,350,6	warp	WPE#0-3-2	1,1,quiz_02,134,347
+quiz_02,240,341,6	warp	WPE#0-3-3	1,1,quiz_02,134,347
+quiz_02,231,341,6	warp	WPE#0-3-4	1,1,quiz_02,134,347
+quiz_02,55,350,6	warp	WPE#1-4-1	1,1,quiz_02,162,347
+quiz_02,64,350,6	warp	WPE#0-4-2	1,1,quiz_02,31,345
+quiz_02,64,341,6	warp	WPE#0-4-3	1,1,quiz_02,31,345
+quiz_02,55,341,6	warp	WPE#0-4-4	1,1,quiz_02,31,345
+quiz_02,157,352,6	warp	WPE#0-5-1	1,1,quiz_02,31,345
+quiz_02,166,352,6	warp	WPE#1-5-2	1,1,quiz_02,264,345
+quiz_02,166,343,6	warp	WPE#0-5-3	1,1,quiz_02,31,345
+quiz_02,157,343,6	warp	WPE#0-5-4	1,1,quiz_02,31,345
+quiz_02,259,350,6	warp	WPE#0-6-1	1,1,quiz_02,31,345
+quiz_02,268,350,6	warp	WPE#0-6-2	1,1,quiz_02,31,345
+quiz_02,268,341,6	warp	WPE#0-6-3	1,1,quiz_02,31,345
+quiz_02,259,341,6	warp	WPE#1-6-4	1,1,quiz_02,304,250

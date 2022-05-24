@@ -1,0 +1,110 @@
+//===== eAthena Script =======================================
+//= PvP 
+//===== By: ==================================================
+//= Shatowolf
+//===== Description: =========================================
+//= A basic PVP script.
+//===== Additional Comments: =================================
+//= Dont copyright this and claiming that you've made this. Use it only for your own server.
+//============================================================
+prontera,159,187,4	script	PVP Warper	828,{
+if (agitcheck() || agitcheck2()) goto L_woeon;
+set @w1,getmapusers("pvp_y_1-2");
+
+mes "[PvP Warper]";
+mes "Which PvP Arena do you want to enter?";
+menu	"PVP Room A [" + getmapusers("pvp_y_1-2") + " / 20]",L1,
+ "PVP Room B [CLOSE]",L2;
+// "Non Custom Arena [" + getmapusers("guild_vs2") + " / 20]",L2;
+	
+OnInit:
+while( 1 ){
+delwaitingroom;
+waitingroom "PVP Warper",0;
+sleep 1000;
+}
+end;
+
+L1:
+if (getmapusers("pvp_y_1-2") > 19) goto Lsorry;
+warp "pvp_y_1-2",0,0;
+close;
+
+L2:
+//if (getmapusers("guild_vs2") > 19) goto Lsorry;
+//warp "guild_vs2",0,0;
+next;
+mes "Under Construction";
+close;
+
+//L2:
+//if (getmapusers("guild_vs2") > 19) goto Lsorry;
+//warp "guild_vs2",0,0;
+//close;
+
+L_woeon:
+mes "Sorry you cant enter during woe time.";
+mes "Please Focus on the War of Emperium.";
+mes "Comeback after WoE has Ended.";
+close;
+
+Lsorry:
+mes "[PvP Warper]";
+mes "Sorry but this PvP Arena is full, maybe you could try another one.";
+close;
+
+L_No:
+close;
+}
+
+pvp_y_1-2	mapflag	nowarpto
+pvp_y_1-2	mapflag	nowarp
+pvp_y_1-2	mapflag	noteleport
+pvp_y_1-2	mapflag	nosave
+pvp_y_1-2	mapflag	nomemo
+pvp_y_1-2	mapflag	nobranch
+pvp_y_1-2	mapflag	noreturn
+pvp_y_1-2	mapflag	pvp_noguild
+pvp_y_1-2	mapflag	pvp
+
+pvp_y_2-2	mapflag	nowarpto
+pvp_y_2-2	mapflag	nowarp
+pvp_y_2-2	mapflag	noteleport
+pvp_y_2-2	mapflag	nosave
+pvp_y_2-2	mapflag	nomemo
+pvp_y_2-2	mapflag	nobranch
+pvp_y_2-2	mapflag	noreturn
+pvp_y_2-2	mapflag	pvp_noguild
+pvp_y_2-2	mapflag	pvp
+
+//-------------------------------
+//       Duplicate NPCs
+//-------------------------------
+
+poblacion,134,183,3	duplicate(PVP Warper)	PvP Warper#pobla	411
+
+morocc,162,97,3	duplicate(PVP Warper)	PvP Warper#h1-2	411
+geffen,196,114,6	duplicate(PVP Warper)	PvP Warper#h1-3	411
+payon,179,226,6	duplicate(PVP Warper)	PvP Warper#h1-4	411
+izlude,123,121,6	duplicate(PVP Warper)	PvP Warper#h1-6	411
+aldebaran,148,113,3	duplicate(PVP Warper)	PvP Warper#h1-7	411
+xmas,142,136,5	duplicate(PVP Warper)	PvP Warper#h1-8	411
+comodo,192,153,6	duplicate(PVP Warper)	PvP Warper#h1-9	411
+gonryun,168,122,4	duplicate(PVP Warper)	PvP Warper#h1-10	411
+umbala,102,158,4	duplicate(PVP Warper)	PvP Warper#h1-11	411
+louyang,226,102,4	duplicate(PVP Warper)	PvP Warper#h1-12	411
+ayothaya,155,115,3	duplicate(PVP Warper)	PvP Warper#h1-13	411
+einbech,58,206,6	duplicate(PVP Warper)	PvP Warper#h1-14	411
+hugel,97,146,6	duplicate(PVP Warper)	PvP Warper#h1-15	411
+moscovia,174,81,6	duplicate(PVP Warper)	PvP Warper#h1-16	411
+dewata,206,185,4	duplicate(PVP Warper)	PvP Warper#h1-17	411
+jawaii,197,294,6	duplicate(PVP Warper)	PvP Warper#h1-18	411
+amatsu,248,245,6	duplicate(PVP Warper)	PvP Warper#h1-19	411
+lighthalzen,167,99,4	duplicate(PVP Warper)	PvP Warper#h1-20	411
+rachel,102,167,4	duplicate(PVP Warper)	PvP Warper#h1-21	411
+malaya,285,366,3	duplicate(PVP Warper)	PvP Warper#h1-22	411
+pay_fild02,123,181,5	duplicate(PVP Warper)	PvP Warper#h1-23	411
+new_zone02,17,182,5	duplicate(PVP Warper)	PvP Warper#h1-24	411
+lhz_in02,239,284,4	duplicate(PVP Warper)	PvP Warper#h1-25	411
+geffen,116,75,3	duplicate(PVP Warper)	PvP Warper#h1-26	411
+payon,186,104,3	duplicate(PVP Warper)	PvP Warper#h1-27	411

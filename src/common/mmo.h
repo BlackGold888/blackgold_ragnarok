@@ -236,7 +236,7 @@
 #endif
 
 #ifndef MAX_LEVEL
-#define MAX_LEVEL 175
+#define MAX_LEVEL 999
 #endif
 #ifndef MAX_FAME
 #define MAX_FAME 1000000000

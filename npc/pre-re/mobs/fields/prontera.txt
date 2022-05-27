@@ -106,10 +106,10 @@ prt_fild07,0,0,0,0	monster	Vocal	1088,1,1800000,1200000,0
 prt_fild07,225,110,5,5	monster	Black Mushroom	1084,3,360000,180000,1
 
 //== prt_fild08 - Prontera Field ===========================
-prt_fild08,0,0,0,0	monster	Lunatic	1063,40,0,0,0
-prt_fild08,0,0,0,0	monster	Pupa	1008,20,0,0,0
-prt_fild08,0,0,0,0	monster	Poring	1002,70,0,0,0
-prt_fild08,0,0,0,0	monster	Drops	1113,10,0,0,0
+prt_fild08,0,0,0,0	monster	Lunatic	1063,140,0,0,0
+prt_fild08,0,0,0,0	monster	Pupa	1008,120,0,0,0
+prt_fild08,0,0,0,0	monster	Poring	1002,300,0,0,0
+prt_fild08,0,0,0,0	monster	Drops	1113,110,0,0,0
 
 //== prt_fild09 - Prontera Field ===========================
 prt_fild09,0,0,0,0	monster	Savage Babe	1167,70,0,0,0

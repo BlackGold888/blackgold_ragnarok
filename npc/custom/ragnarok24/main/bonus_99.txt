@@ -17,7 +17,7 @@ prontera,139,183,6	script	Bonus 99	4_M_SURA,{
 	set variable,1;
 	close;
 
-}else if(BaseLevel == 99 && variable2 != 1 && Upper == 1){
+}else if(BaseLevel >= 99 && variable2 != 1 && Upper == 1){
 	mes "Ты получаешь награду за поддержку сервера";
 	mes "Мы благодарны за выбор нашего Мира.";
 	next;

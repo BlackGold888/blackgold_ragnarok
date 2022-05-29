@@ -1159,7 +1159,7 @@ static int skill_calc_heal(struct block_list *src, struct block_list *target, ui
 			 **/
 			hp = (status->get_lv(src) + status_get_int(src)) / 5 * 30  * skill_lv / 10;
 #else // not RENEWAL
-			hp = ( status->get_lv(src) + status_get_int(src) ) / 8 * (4 + ( skill_id == AB_HIGHNESSHEAL ? ( sd ? pc->checkskill(sd,AL_HEAL) : 10 ) : skill_lv ) * 8);
+			hp = ( status->get_lv(src) + status_get_int(src) ) / 8 * (4 + ( skill_id == AB_HIGHNESSHEAL ? ( sd ? pc->checkskill(sd,AL_HEAL) : 10 ) : skill_lv ) * 80);
 #endif // RENEWAL
 			if (sd && (skill2_lv = pc->checkskill(sd, HP_MEDITATIO)) > 0)
 				hp += hp * skill2_lv * 2 / 100;
